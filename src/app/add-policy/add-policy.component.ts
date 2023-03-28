@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Policy } from '../models/policy.model';
+import { Policy } from '../models';
 
 @Component({
   selector: 'app-add-policy',
