@@ -1,4 +1,4 @@
-<form [formGroup]="addPolicyForm">
+<form [formGroup]="createPolicyForm">
     <div class="container">
         <div class="row">
             <div class="col-2">
@@ -18,8 +18,12 @@
         </div>
         <div class="row">
             <div class="col-12 text-end">
-                <button type="button" class="btn btn-primary">Create</button>
+                <button type="button" class="btn btn-primary" (click)="createPolicy()">Create</button>
             </div>
         </div>
     </div>
 </form>
+
+<div>
+    {{ createPolicyForm.value | json }}
+</div>

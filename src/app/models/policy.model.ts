@@ -1,9 +1,8 @@
-import { FormControl } from '@angular/forms';
-import { LabelValue } from './app.model';
+import { LabelValue } from "./form.model";
 
 export interface Policy {
-    name: FormControl<string>;
-    description: FormControl<string>;
+    name: string;
+    description: string;
 };
 
 export type PolicyPhase = LabelValue;
