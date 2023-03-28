@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
-import { Observable, catchError } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { Injectable } from "@angular/core";
 
 import { environment } from '../../environments/environment';
@@ -14,9 +14,11 @@ export class CreatePolicyResolver implements Resolve<PolicyPhase | boolean> {
     
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PolicyPhase | boolean> {
 
-        return this.http.get<PolicyPhase>(environment.api + "phases").pipe(
-            catchError(err => this.router.navigate(["/error"]))
-        );
+        return of(true);
+        // TODO: 
+        // return this.http.get<PolicyPhase>(environment.api + "phases").pipe(
+        //     catchError(err => this.router.navigate(["/error"]))
+        // );
     }
 
     
