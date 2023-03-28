@@ -5,7 +5,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 const routes: Routes = [
   { 
     path: 'add-policy', 
-    loadChildren: () => import('./add-policy/add-policy.module').then(m => m.AddPolicyModule) 
+    loadChildren: () => import('./add-policy/add-policy.module').then(m => m.AddPolicyModule)
   }, 
   { 
     path: 'view-modify-policy',
