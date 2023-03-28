@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Policy } from '../models/policy.model';
 
 @Component({
   selector: 'app-add-policy',
@@ -7,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class AddPolicyComponent {
 
+  addPolicyForm: FormGroup<Policy> = new FormGroup<Policy>({
+    name: new FormControl('', {nonNullable: true}),
+    description: new FormControl('', {nonNullable: true})
+  });
+
+
+  onSubmit(): void {
+    
+  }
 }
