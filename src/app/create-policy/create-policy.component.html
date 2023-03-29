@@ -30,13 +30,23 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 text-end">
-                <button type="button" class="btn btn-primary" (click)="createPolicy()">Create</button>
+            <div class="col-12 col-button">
+                <div *ngIf="processing; else createButton" class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <ng-template #createButton>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="createPolicy()">
+                        Create
+                    </button>
+                </ng-template>
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    {{ createPolicyForm.value | json }}
+   Value - {{ createPolicyForm.value | json }}
+</div>
+<div>
+   Validity {{ createPolicyForm.valid | json }}
 </div>
