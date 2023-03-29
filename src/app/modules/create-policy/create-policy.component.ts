@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil, tap } from 'rxjs';
-import { PolicyForm, PolicyPhase } from '../shared/models';
-import { PolicyService } from '../shared/services/policy.service';
+import { PolicyForm, PolicyPhase } from '../../shared/models';
+import { PolicyService } from '../../shared/services/policy.service';
 
 @Component({
   selector: 'app-create-policy',

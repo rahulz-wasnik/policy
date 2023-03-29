@@ -3,9 +3,9 @@ import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@a
 import { Observable, catchError, of } from 'rxjs';
 import { Injectable } from "@angular/core";
 
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
-import { PolicyPhase } from "../shared/models";
+import { PolicyPhase } from "../../shared/models";
 
 @Injectable()
 export class CreatePolicyResolver implements Resolve<Array<PolicyPhase> | boolean> {
