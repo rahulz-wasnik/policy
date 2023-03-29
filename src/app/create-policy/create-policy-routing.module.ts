@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreatePolicyComponent } from './create-policy.component';
 import { CreatePolicyResolver } from './create-policy.resolver';
 
-const routes: Routes = [{ path: '', component: CreatePolicyComponent, resolve: { data: CreatePolicyResolver } }];
+const routes: Routes = [{ path: '', component: CreatePolicyComponent, resolve: { phases: CreatePolicyResolver } }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

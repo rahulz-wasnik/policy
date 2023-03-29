@@ -2,18 +2,31 @@
     <div class="container">
         <div class="row">
             <div class="col-2">
-                Policy Name
+                Policy phase
             </div>
             <div class="col-10">
-                <input class="form-control form-control-sm" type="text" aria-label=".form-control-sm policy name"  formControlName="name">
+                <select class="form-select" aria-label="Select phase" formControlName="phase">
+                    <option value="">Select</option>
+                    <option *ngFor="let phase of phases;" value="phase.label">{{ phase.value }}</option>
+                </select>
             </div>
         </div>
         <div class="row">
             <div class="col-2">
-                Policy Description
+                Policy name
             </div>
             <div class="col-10">
-                <textarea class="form-control form-control-sm" type="text" aria-label=".form-control-sm policy name"  formControlName="description"></textarea>
+                <input class="form-control form-control-sm" type="text" aria-label=".form-control-sm policy name"
+                    formControlName="name">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                Policy description
+            </div>
+            <div class="col-10">
+                <textarea class="form-control form-control-sm" type="text" aria-label=".form-control-sm policy name"
+                    formControlName="description"></textarea>
             </div>
         </div>
         <div class="row">
