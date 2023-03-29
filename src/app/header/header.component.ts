@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { routeConstants } from '../shared/constants';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  createPolicy = routeConstants.CREATEPOLICY; 
+  viewModifyPolicy = routeConstants.VIEWMODIFYPOLICY;
+  viewHistory = routeConstants.VIEWPOLICYHISTORY;
 }
