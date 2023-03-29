@@ -22,7 +22,7 @@ export class CreatePolicyResolver implements Resolve<Array<PolicyPhase> | boolea
         ]
 
         return of(value);
-        // TODO: 
+        // TODO: Add logic for fetching data from the backend
         // return this.http.get<PolicyPhase>(environment.api + "phases").pipe(
         //     catchError(err => this.router.navigate(["/error"]))
         // );
