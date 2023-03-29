@@ -1,22 +1,20 @@
-# Policy
+# Installations
+Install Ndde v 16.14.0.
+* * Optional Installation - angular cli `npm install -g --save-exact @angular/cli@15.0.4`.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+## Development
 
-## Development server
-
+Run `npm install`
+Change the port in the file proxy.config.json to point to your relevant backend port.
 Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Further help
 
