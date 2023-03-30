@@ -10,3 +10,5 @@ export interface LabelValue {
     label: string;
     value: string;
 };
+
+export type FormGroupTypes = PolicyForm;

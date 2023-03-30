@@ -1,10 +1,13 @@
-import { FormGroup } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
+import { FormGroupTypes } from "../models";
 
-export function markFormGroupTouched(formGroup: FormGroup): void {
-    (Object as any).values(formGroup.controls).forEach((control: any) => {
+type ControlTypes = FormControl | FormGroup<FormGroupTypes>;
+
+export function markFormGroupTouched(formGroup: FormGroup<FormGroupTypes>): void {
+    Object.values(formGroup.controls).forEach((control: ControlTypes) => {
         control.markAsTouched();
-        if (control.controls) {
-            markFormGroupTouched(control);
+        if ((control as FormGroup<FormGroupTypes>).controls) {
+            markFormGroupTouched(control as FormGroup<FormGroupTypes>);
         }
     });
 }
