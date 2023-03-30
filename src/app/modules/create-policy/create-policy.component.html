@@ -5,10 +5,13 @@
                 Policy phase
             </div>
             <div class="col-10">
-                <select class="form-select" aria-label="Select phase" formControlName="phase">
+                <select aria-label="Select phase" formControlName="phase" class="form-select"
+                    [class.border-danger]="phase.invalid && (phase.dirty || phase.touched)">
                     <option value="">Select</option>
                     <option *ngFor="let phase of phases;" value="{{phase.label}}">{{ phase.value }}</option>
                 </select>
+                <app-form-validation [appControl]="phase"
+                    errorMessage="Policy phase is required."></app-form-validation>
             </div>
         </div>
         <div class="row">
@@ -16,8 +19,9 @@
                 Policy name
             </div>
             <div class="col-10">
-                <input class="form-control form-control-sm" type="text" aria-label=".form-control-sm policy name"
-                    formControlName="name">
+                <input type="text" aria-label=".form-control-sm policy name" class="form-control form-control-sm"
+                    [class.border-danger]="phase.invalid && (phase.dirty || phase.touched)" formControlName="name">
+                <app-form-validation [appControl]="name" errorMessage="Policy name is required."></app-form-validation>
             </div>
         </div>
         <div class="row">
@@ -25,7 +29,7 @@
                 Policy description
             </div>
             <div class="col-10">
-                <textarea class="form-control form-control-sm" type="text" aria-label=".form-control-sm policy name"
+                <textarea type="text" aria-label=".form-control-sm policy name" class="form-control form-control-sm"
                     formControlName="description"></textarea>
             </div>
         </div>
@@ -45,8 +49,8 @@
 </form>
 
 <div>
-   Value - {{ createPolicyForm.value | json }}
+    Value - {{ createPolicyForm.value | json }}
 </div>
 <div>
-   Validity {{ createPolicyForm.valid | json }}
+    Validity {{ createPolicyForm.valid | json }}
 </div>

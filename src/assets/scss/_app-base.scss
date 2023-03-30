@@ -1,4 +1,5 @@
 @forward './fonts';
+@use 'bootstrap/scss/bootstrap.scss';
 
 *,
 *::after,
@@ -26,4 +27,12 @@ body,
 .button-container {
     display: flex;
     justify-content: right;
+}
+
+.error {
+    color: bootstrap.$danger;
+    
+    &-text {
+        font-size: 14px;
+    }
 }

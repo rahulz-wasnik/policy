@@ -1,0 +1,4 @@
+<div *ngIf="appControl.invalid && (appControl.dirty || appControl.touched)" class="form-validation-container error" role="alert">
+    <app-alert></app-alert>
+    <div class="error-text error-text-container">{{ errorMessage }}</div>
+</div>

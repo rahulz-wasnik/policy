@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil, tap } from 'rxjs';
+
+import { markFormGroupTouched } from '../../shared/utils';
 import { PolicyForm, PolicyPhase } from '../../shared/models';
 import { PolicyService } from '../../shared/services/policy.service';
 
@@ -13,8 +15,8 @@ import { PolicyService } from '../../shared/services/policy.service';
 export class CreatePolicyComponent implements OnInit, OnDestroy {
 
   createPolicyForm: FormGroup<PolicyForm> = new FormGroup<PolicyForm>({
-    phase: new FormControl('', {nonNullable: true}),
-    name: new FormControl('', {nonNullable: true}),
+    phase: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
+    name: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
     description: new FormControl('', {nonNullable: true})
   });
 
@@ -35,7 +37,16 @@ export class CreatePolicyComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  get phase(): FormControl {
+    return this.createPolicyForm.get('phase') as FormControl;
+  }
+
+  get name(): FormControl {
+    return this.createPolicyForm.get('name') as FormControl;
+  }
+
   createPolicy(): void {
+    markFormGroupTouched(this.createPolicyForm);
     if (this.createPolicyForm.valid) {
       this.processing = true;
       this.policyService.createPolicy(this.createPolicyForm.getRawValue())

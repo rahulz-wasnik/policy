@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreatePolicyRoutingModule } from './create-policy-routing.module';
 import { CreatePolicyComponent } from './create-policy.component';
 import { CreatePolicyResolver } from './create-policy.resolver';
+import { FormValidationComponent } from '../../shared/components/form-validation/form-validation.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { CreatePolicyResolver } from './create-policy.resolver';
   imports: [
     CommonModule,
     CreatePolicyRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormValidationComponent
   ],
   providers: [
     CreatePolicyResolver
