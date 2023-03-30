@@ -1,0 +1,29 @@
+@forward './fonts';
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+body,
+.form-control,
+.form-select {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+.row {
+    padding: 0.5rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: right;
+}
