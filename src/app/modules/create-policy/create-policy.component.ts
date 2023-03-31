@@ -20,7 +20,7 @@ export class CreatePolicyComponent implements OnInit, OnDestroy {
     description: new FormControl('', {nonNullable: true})
   });
 
-  phases!: Array<PolicyPhase>;
+  phases!: PolicyPhase;
 
   processing: boolean = false;
 

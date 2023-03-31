@@ -14,18 +14,18 @@ export class CreatePolicyResolver implements Resolve<PolicyPhase | boolean> {
     
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PolicyPhase | boolean> {
 
-        // const value = [
-        //     {
-        //         label: 'a',
-        //         value: 'a'
-        //     }
-        // ]
+        const value: PolicyPhase = [
+            {
+                label: 'a',
+                value: 'a'
+            }
+        ];
 
-        // return of(value);
+        return of(value);
         // TODO: Add logic for fetching data from the backend
-        return this.http.get<PolicyPhase>(environment.api + "phases").pipe(
-            catchError(err => this.router.navigate(["/error"]))
-        );
+        // return this.http.get<PolicyPhase>(environment.api + "phases").pipe(
+        //     catchError(err => this.router.navigate(["/error"]))
+        // );
     }
 
     

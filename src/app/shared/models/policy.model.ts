@@ -5,7 +5,7 @@ export interface Policy {
     description: string;
 };
 
-export type PolicyPhase = LabelValue;
+export type PolicyPhase = LabelValue[];
 
 export type RiskProfile = LabelValue[];
 
