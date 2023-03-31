@@ -24,11 +24,11 @@ export class ViewModifyPolicyResolver implements Resolve<RiskProfileAndRequiredP
         // TODO: Add logic for fetching data from the backend
         // return forkJoin(
         //     {
-        //         riskProfiles: this.http.get(environment.api + 'riskProfiles'),
-        //         policies: this.http.get(environment.api + 'policies')
+        //         riskProfiles: this.http.get<RiskProfile>(environment.api + 'riskProfiles'),
+        //         policies: this.http.get<RequiredPolicies>(environment.api + 'policies')
         //     }
         // ).pipe(
-        //     map(({ riskProfiles, policies}) => ({ riskProfiles, policies } ))
+        //     catchError(err => this.router.navigate(["/error"]))
         // )
     }
 }
