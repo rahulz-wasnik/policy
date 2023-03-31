@@ -6,3 +6,14 @@ export interface Policy {
 };
 
 export type PolicyPhase = LabelValue;
+
+export type RiskProfile = LabelValue[];
+
+export type RequiredPolicies = LabelValue[];
+
+export interface PolicyMatrix {
+    applicationType: string;
+    releaseType: string;
+    riskProfile: string;
+    requiredPolicies: Array<string>;
+}

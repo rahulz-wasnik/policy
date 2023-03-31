@@ -8,11 +8,11 @@ import { environment } from '../../../environments/environment';
 import { PolicyPhase } from "../../shared/models";
 
 @Injectable()
-export class CreatePolicyResolver implements Resolve<Array<PolicyPhase> | boolean> {
+export class CreatePolicyResolver implements Resolve<any> {
    
     constructor(private http: HttpClient, private router: Router) {}
     
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Array<PolicyPhase> | boolean> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
 
         const value = [
             {

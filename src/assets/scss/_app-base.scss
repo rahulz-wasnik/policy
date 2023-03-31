@@ -1,5 +1,6 @@
 @forward './fonts';
 @use 'bootstrap/scss/bootstrap.scss';
+@import '@ng-select/ng-select/themes/default.theme.css';
 
 *,
 *::after,
@@ -27,12 +28,15 @@ body,
 .button-container {
     display: flex;
     justify-content: right;
+    align-items: center;
 }
 
 .error {
     color: bootstrap.$danger;
-    
     &-text {
         font-size: 14px;
+        margin-left: 4px;
+        margin-right: 4px;
     }
+
 }
