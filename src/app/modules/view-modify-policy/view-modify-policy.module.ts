@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ViewModifyPolicyRoutingModule } from './view-modify-policy-routing.module';
 import { ViewModifyPolicyComponent } from './view-modify-policy.component';
 import { ViewModifyPolicyResolver } from './view-modify-policy.resolver';
+import { MessageComponent } from 'src/app/shared/components/message/message.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ViewModifyPolicyResolver } from './view-modify-policy.resolver';
     CommonModule,
     ViewModifyPolicyRoutingModule,
     ReactiveFormsModule,
-    NgSelectModule
+    NgSelectModule,
+    MessageComponent
   ],
   providers: [
     ViewModifyPolicyResolver

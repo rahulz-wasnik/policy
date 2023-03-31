@@ -35,8 +35,24 @@ body,
     color: bootstrap.$danger;
     &-text {
         font-size: 14px;
-        margin-left: 4px;
-        margin-right: 4px;
+        margin-left:  4px;
+        margin-right:  4px;
     }
+    &-container {
+        display: flex;
+        align-items: center;
+    }
+}
 
+.success {
+    color: bootstrap.$success;
+    &-text {
+        font-size: 14px;
+        margin-left:  4px;
+        margin-right:  4px;
+    }
+    &-container {
+        display: flex;
+        align-items: center;
+    }
 }

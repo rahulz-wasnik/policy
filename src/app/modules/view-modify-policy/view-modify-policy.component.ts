@@ -20,15 +20,18 @@ export class ViewModifyPolicyComponent implements OnInit, OnDestroy {
     requiredPolicies: new FormControl([], { nonNullable: true }),
   });
 
-  processing: boolean = false;
-
+  
   riskProfiles!: RiskProfile;
-
+  
   policies!: RiskProfile;
-
+  
   destroy$ = new Subject<boolean>();
+  
+  processing: boolean = false;
+  
+  hasErrorPostProcessing: boolean = false;
 
-  errorMessage: string = '';
+  message: string = '';
 
   constructor(private route: ActivatedRoute, private policyService: PolicyService) { }
 
@@ -45,22 +48,28 @@ export class ViewModifyPolicyComponent implements OnInit, OnDestroy {
   }
 
   createPolicyMatrix(): void {
-    this.processing = true;
-    this.errorMessage = '';
+    
+    this.reset();
+
     this.policyService.createPolicyMatrix(this.viewModifyPolicyForm.getRawValue())
       .pipe(
-        tap(() => this.processing = false),
+        tap(() => {
+          this.processing = false;
+          this.message = 'Policy matrix created successfully';
+        }),
         takeUntil(this.destroy$),
         catchError(() => {
           this.processing = false;
-          this.errorMessage = 'An error occured during creation.';
+          this.hasErrorPostProcessing = true;
+          this.message = 'An error occured during creation.';
           return EMPTY;
         })
       ).subscribe();
   }
-}
 
-
-export function handleError(): void {
-
+  private reset(): void {
+    this.message = '';
+    this.processing = true;
+    this.hasErrorPostProcessing = false;
+  }
 }
