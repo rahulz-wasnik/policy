@@ -6,6 +6,7 @@ import { CreatePolicyRoutingModule } from './create-policy-routing.module';
 import { CreatePolicyComponent } from './create-policy.component';
 import { CreatePolicyResolver } from './create-policy.resolver';
 import { FormValidationComponent } from '../../shared/components/form-validation/form-validation.component';
+import { MessageComponent } from '../../shared/components/message/message.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { FormValidationComponent } from '../../shared/components/form-validation
     CommonModule,
     CreatePolicyRoutingModule,
     ReactiveFormsModule,
-    FormValidationComponent
+    FormValidationComponent,
+    MessageComponent
   ],
   providers: [
     CreatePolicyResolver

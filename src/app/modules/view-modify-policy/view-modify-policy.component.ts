@@ -55,7 +55,7 @@ export class ViewModifyPolicyComponent implements OnInit, OnDestroy {
       .pipe(
         tap(() => {
           this.processing = false;
-          this.message = 'Policy matrix created successfully';
+          this.message = 'Policy matrix created successfully.';
         }),
         takeUntil(this.destroy$),
         catchError(() => {

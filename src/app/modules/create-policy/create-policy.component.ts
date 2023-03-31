@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil, tap } from 'rxjs';
+import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs';
 
 import { markFormGroupTouched } from '../../shared/utils';
 import { PolicyForm, PolicyPhase } from '../../shared/models';
@@ -23,6 +23,10 @@ export class CreatePolicyComponent implements OnInit, OnDestroy {
   phases!: PolicyPhase;
 
   processing: boolean = false;
+  
+  hasErrorPostProcessing: boolean = false;
+
+  message: string = '';
 
   destroy$ = new Subject<boolean>(); 
 
@@ -46,15 +50,33 @@ export class CreatePolicyComponent implements OnInit, OnDestroy {
   }
 
   createPolicy(): void {
+    
     markFormGroupTouched(this.createPolicyForm);
+    
     if (this.createPolicyForm.valid) {
-      this.processing = true;
+      this.reset();
+
       this.policyService.createPolicy(this.createPolicyForm.getRawValue())
       .pipe(
-        tap((value) => this.processing = false),
-        takeUntil(this.destroy$)
+        tap(() => {
+          this.processing = false;
+          this.message = 'Policy created successfully.';
+        }),
+        takeUntil(this.destroy$),
+        catchError(() => {
+          this.processing = false;
+          this.hasErrorPostProcessing = true;
+          this.message = 'An error occured during creation.';
+          return EMPTY;
+        })
       ).subscribe();
     }
+  }
+
+  private reset(): void {
+    this.message = '';
+    this.processing = true;
+    this.hasErrorPostProcessing = false;
   }
 }
  
