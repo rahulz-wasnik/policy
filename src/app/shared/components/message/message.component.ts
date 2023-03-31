@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AlertComponent } from '../../svg/alert/alert.component';
-import { SuccessComponent } from '../../svg/success/success.component';
+import { AlertComponent } from '../../svgs/alert/alert.component';
+import { SuccessComponent } from '../../svgs/success/success.component';
 
 @Component({
   selector: 'app-message',

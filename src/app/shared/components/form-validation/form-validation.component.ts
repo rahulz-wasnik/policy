@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { AlertComponent } from '../../svg/alert/alert.component';
+import { AlertComponent } from '../../svgs/alert/alert.component';
 
 @Component({
   standalone: true,
