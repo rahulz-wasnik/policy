@@ -8,7 +8,7 @@
     margin-left: auto;
     margin-right: auto;
 
-    grid-template-rows: 1rem repeat(5, app-variables.$spacing-24);
+    grid-template-rows: app-variables.$spacing-16 repeat(5, app-variables.$spacing-24);
     grid-template-columns: max-content 1fr;
     grid-gap: app-variables.$spacing-40;
 
