@@ -57,13 +57,13 @@ export class ViewModifyPolicyComponent implements OnInit, OnDestroy {
           this.processing = false;
           this.message = 'Policy matrix created successfully.';
         }),
-        takeUntil(this.destroy$),
         catchError(() => {
           this.processing = false;
           this.hasErrorPostProcessing = true;
           this.message = 'An error occured during creation.';
           return EMPTY;
-        })
+        }),
+        takeUntil(this.destroy$),
       ).subscribe();
   }
 

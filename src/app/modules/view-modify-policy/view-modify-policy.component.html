@@ -10,7 +10,7 @@
             </div>
             <div class="col-10">
                 <select aria-label="Select phase" formControlName="applicationType" class="form-select">
-                    <option value="">Select</option>
+                    <option value=""></option>
                     <option value="A1">A1</option>
                     <option value="A2">A2</option>
                     <option value="A3">A3</option>
@@ -24,7 +24,7 @@
             </div>
             <div class="col-10">
                 <select aria-label="Select phase" formControlName="releaseType" class="form-select">
-                    <option value="">Select</option>
+                    <option value=""></option>
                     <option value="Solution launch">Solution launch</option>
                     <option value="Major">Major</option>
                     <option value="Minor">Minor</option>
@@ -38,7 +38,7 @@
             </div>
             <div class="col-10">
                 <select aria-label="Select phase" formControlName="riskProfile" class="form-select">
-                    <option value="">Select</option>
+                    <option value=""></option>
                     <option *ngFor="let riskProfile of riskProfiles;" value="{{riskProfile.label}}">{{ riskProfile.value }}</option>
                 </select>
             </div>

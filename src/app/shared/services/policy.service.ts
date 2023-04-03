@@ -21,11 +21,13 @@ export class PolicyService {
         // });
     }
 
-    createPolicyMatrix(policyMatrix: PolicyMatrix): Observable<PolicyMatrix> {
-        return this.http.post<PolicyMatrix>(environment.api + "createPolicyMatrix", JSON.stringify(policyMatrix), {
+    createPolicyMatrix(policyMatrix: PolicyMatrix): Observable<String> {
+        return this.http.post<String>(environment.api + "createPolicyMatrix", JSON.stringify(policyMatrix), {
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+                'Accept': 'text/plain'
+            },
+            responseType: 'text' as 'json'
         });
     }
 }
