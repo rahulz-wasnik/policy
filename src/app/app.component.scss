@@ -1,3 +1,5 @@
+@use '../assets/scss/app-variables';
+
 #main-content {
-    margin-top: 5rem;
+    margin-top: app-variables.$spacing-4;
 }

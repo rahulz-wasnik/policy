@@ -1,52 +1,48 @@
 <form [formGroup]="createPolicyForm">
-    <div class="container">
-        <div class="row">
+    <div class="content">
+        <div class="message-area">
             <app-message [hasError]="hasErrorPostProcessing" [message]="message"></app-message>
         </div>
-        <div class="row">
-            <div class="col-2">
-                Policy phase
-            </div>
-            <div class="col-10">
-                <select aria-label="Select phase" formControlName="phase" class="form-select"
+
+        <div>
+            <label for="phase">Policy phase</label>
+        </div>
+        <div>
+            <select aria-label="Select phase" formControlName="phase" class="form-select"
                     [class.border-danger]="phase.invalid && (phase.dirty || phase.touched)">
-                    <option value="">Select</option>
+                    <option value=""></option>
                     <option *ngFor="let phase of phases;" value="{{phase.label}}">{{ phase.value }}</option>
                 </select>
                 <app-form-validation [appControl]="phase"
                     errorMessage="Policy phase is required."></app-form-validation>
-            </div>
         </div>
-        <div class="row">
-            <div class="col-2">
-                Policy name
-            </div>
-            <div class="col-10">
-                <input type="text" aria-label=".form-control-sm policy name" class="form-control form-control-sm"
+
+        <div>
+            <label for="name">Policy name</label>
+        </div>
+        <div>
+            <input type="text" aria-label=".form-control-sm policy name" class="form-control form-control-sm"
                     [class.border-danger]="phase.invalid && (phase.dirty || phase.touched)" formControlName="name">
                 <app-form-validation [appControl]="name" errorMessage="Policy name is required."></app-form-validation>
-            </div>
         </div>
-        <div class="row">
-            <div class="col-2">
-                Policy description
-            </div>
-            <div class="col-10">
-                <textarea type="text" aria-label=".form-control-sm policy name" class="form-control form-control-sm"
+
+        <div>
+            <label for="description">Policy description</label>
+        </div>
+        <div>
+            <textarea type="text" aria-label=".form-control-sm policy name" class="form-control form-control-sm"
                     formControlName="description"></textarea>
-            </div>
         </div>
-        <div class="row">
-            <div class="col-12 button-container">
-                <div *ngIf="processing; else createButton" class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-                <ng-template #createButton>
-                    <button type="button" class="btn btn-primary btn-sm" (click)="createPolicy()">
-                        Create
-                    </button>
-                </ng-template>
+
+        <div class="button-area">
+            <div *ngIf="processing; else createButton" class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
+            <ng-template #createButton>
+                <button type="button" class="btn btn-primary btn-sm" (click)="createPolicy()">
+                    Create
+                </button>
+            </ng-template>
         </div>
     </div>
 </form>

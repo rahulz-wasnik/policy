@@ -1,72 +1,64 @@
-
 <form [formGroup]="viewModifyPolicyForm">
-    <div class="container">
-        <div class="row">
+    <div class="content">
+        <div class="message-area">
             <app-message [hasError]="hasErrorPostProcessing" [message]="message"></app-message>
         </div>
-        <div class="row">
-            <div class="col-2">
-                <label for="applicationType">Application type</label>
-            </div>
-            <div class="col-10">
-                <select aria-label="Select phase" formControlName="applicationType" class="form-select">
-                    <option value=""></option>
-                    <option value="A1">A1</option>
-                    <option value="A2">A2</option>
-                    <option value="A3">A3</option>
-                    <option value="A4">A4</option>
-                </select>
-            </div>
+
+        <div>
+            <label for="applicationType">Application type</label>
         </div>
-        <div class="row">
-            <div class="col-2">
-                <label for="releaseType">Release type</label>
-            </div>
-            <div class="col-10">
-                <select aria-label="Select phase" formControlName="releaseType" class="form-select">
-                    <option value=""></option>
-                    <option value="Solution launch">Solution launch</option>
-                    <option value="Major">Major</option>
-                    <option value="Minor">Minor</option>
-                    <option value="Hotfix">Hotfix</option>
-                </select>
-            </div>
+        <div>
+            <select aria-label="Select phase" formControlName="applicationType" class="form-select">
+                <option value=""></option>
+                <option value="A1">A1</option>
+                <option value="A2">A2</option>
+                <option value="A3">A3</option>
+                <option value="A4">A4</option>
+            </select>
         </div>
-        <div class="row">
-            <div class="col-2">
-                <label for="riskProfile">Risk profile</label>
-            </div>
-            <div class="col-10">
-                <select aria-label="Select phase" formControlName="riskProfile" class="form-select">
-                    <option value=""></option>
-                    <option *ngFor="let riskProfile of riskProfiles;" value="{{riskProfile.label}}">{{ riskProfile.value }}</option>
-                </select>
-            </div>
+
+        <div>
+            <label for="releaseType">Release type</label>
         </div>
-        <div class="row">
-            <div class="col-2">
-                <label for="requiredPolicies">Required policies</label>
-            </div>
-            <div class="col-10">
-                <ng-select [items]="policies" 
-                    bindLabel="label" 
-                    bindValue="value" 
-                    formControlName="requiredPolicies"
-                    [multiple]="true">
-                </ng-select>
-            </div>
+        <div>
+            <select aria-label="Select phase" formControlName="releaseType" class="form-select">
+                <option value=""></option>
+                <option value="Solution launch">Solution launch</option>
+                <option value="Major">Major</option>
+                <option value="Minor">Minor</option>
+                <option value="Hotfix">Hotfix</option>
+            </select>
         </div>
-        <div class="row">
-            <div class="col-12 button-container">
-                <div *ngIf="processing; else createButton" class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-                <ng-template #createButton>
-                    <button type="button" class="btn btn-primary btn-sm" (click)="createPolicyMatrix()">
-                        Create
-                    </button>
-                </ng-template>
+
+        <div>
+            <label for="riskProfile">Risk profile</label>
+        </div>
+        <div>
+            <select aria-label="Select phase" formControlName="riskProfile" class="form-select">
+                <option value=""></option>
+                <option *ngFor="let riskProfile of riskProfiles;" value="{{riskProfile.label}}">{{ riskProfile.value }}
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <label for="requiredPolicies">Required policies</label>
+        </div>
+        <div>
+            <ng-select [items]="policies" bindLabel="label" bindValue="value" formControlName="requiredPolicies"
+                [multiple]="true">
+            </ng-select>
+        </div>
+
+        <div class="button-area">
+            <div *ngIf="processing; else createButton" class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
+            <ng-template #createButton>
+                <button type="button" class="btn btn-primary btn-sm" (click)="createPolicyMatrix()">
+                    Create
+                </button>
+            </ng-template>
         </div>
     </div>
 </form>

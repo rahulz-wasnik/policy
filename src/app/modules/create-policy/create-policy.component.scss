@@ -1,0 +1,32 @@
+@use '../../../assets/scss/app-variables';
+
+
+.content {
+    display: grid;
+    width: 80%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+
+    grid-template-rows: 1rem repeat(4, app-variables.$spacing-24);
+    grid-template-columns: max-content 1fr;
+    grid-gap: app-variables.$spacing-40;
+
+    align-items: center;
+
+    grid-template-areas:    
+    "message message"
+    "label control"
+    "label control"
+    "label control"
+    "button button";
+
+    .button-area {
+        grid-area: button;
+        justify-self: end;
+    }
+
+    .message-area {
+        grid-area: message;
+    }
+}

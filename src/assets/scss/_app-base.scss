@@ -1,6 +1,7 @@
-@forward './fonts';
+@use './app-variables';
 @use 'bootstrap/scss/bootstrap.scss';
 @import '@ng-select/ng-select/themes/default.theme.css';
+
 
 *,
 *::after,
@@ -21,38 +22,34 @@ body,
     font-weight: 300;
 }
 
-.row {
-    padding: 0.5rem;
+
+%msg-text {
+    font-size: app-variables.$font-size-md;
+    margin-left:  app-variables.$spacing-4;
+    margin-right:  app-variables.$spacing-4;
 }
 
-.button-container {
+%msg-container {
     display: flex;
-    justify-content: right;
     align-items: center;
 }
 
 .error {
     color: bootstrap.$danger;
     &-text {
-        font-size: 14px;
-        margin-left:  4px;
-        margin-right:  4px;
+        @extend %msg-text;
     }
     &-container {
-        display: flex;
-        align-items: center;
+        @extend %msg-container;
     }
 }
 
 .success {
     color: bootstrap.$success;
     &-text {
-        font-size: 14px;
-        margin-left:  4px;
-        margin-right:  4px;
+        @extend %msg-text;
     }
     &-container {
-        display: flex;
-        align-items: center;
+        @extend %msg-container;
     }
 }
