@@ -17,6 +17,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/view-policy-history/view-policy-history.module').then(m => m.ViewPolicyHistoryModule)
   },
   { path: 'error', component: ErrorPageComponent },
+  { path: 'snapshot', loadChildren: () => import('./modules/snapshot/snapshot.module').then(m => m.SnapshotModule) },
 ];
 
 @NgModule({

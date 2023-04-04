@@ -17,3 +17,13 @@ export interface PolicyMatrix {
     riskProfile: string;
     requiredPolicies: Array<string>;
 }
+
+export interface PolicyMatrixResponse extends Omit<PolicyMatrix, "requiredPolicies"> {
+    id: string;
+    requiredPolicies: Array<RequiredPolicyResponse>;
+}
+
+export interface RequiredPolicyResponse {
+    id: string;
+    policyId: string;
+}
