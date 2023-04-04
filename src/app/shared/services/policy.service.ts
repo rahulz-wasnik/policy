@@ -34,12 +34,12 @@ export class PolicyService {
 
     // TODO: To be refactored
     getPolicyMatrix(id: string): Observable<PolicyMatrixResponse> {
-        return this.http.get<PolicyMatrixResponse>(environment.api + "getPolicyMatrix/" + id);
+        return this.http.get<PolicyMatrixResponse>(environment.api + "policyMatrix/" + id);
     }
 
     // TODO: To be refactored
     deletePolicyMatrix(id: string): Observable<string> {
-        return this.http.post<string>(environment.api + "deletePolicyMatrix/" + id, {
+        return this.http.delete<string>(environment.api + "deletePolicyMatrix/" + id, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'text/plain'
