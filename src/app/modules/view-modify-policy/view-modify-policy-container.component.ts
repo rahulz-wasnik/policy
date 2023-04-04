@@ -59,6 +59,7 @@ export class ViewModifyPolicyContainerComponent implements OnInit, OnDestroy {
                         policyMatrixResponse
                     });
                 }),
+                finalize(() => this.policyMatrixService.policyMatrixResponse$.next(null)),
                 takeUntil(this.destroy$)
             )
             .subscribe();
@@ -127,7 +128,6 @@ export class ViewModifyPolicyContainerComponent implements OnInit, OnDestroy {
                     });
                     return EMPTY;
                 }),
-                finalize(() => this.policyMatrixService.policyMatrixResponse$.next(null)),
                 takeUntil(this.destroy$)
             ).subscribe();
     }
