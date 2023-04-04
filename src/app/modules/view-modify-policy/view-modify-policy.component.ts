@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil, tap, catchError, EMPTY } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { takeUntil, tap, catchError, EMPTY } from 'rxjs';
 
-import { PolicyService } from '../../shared/services/policy.service';
+import { PolicyMatrixService } from '../../shared/services/policy-matrix.service';
 import { RiskProfile, ViewModifyForm } from '../../shared/models';
 import { markFormGroupTouched } from 'src/app/shared/utils';
 import { AppForm } from '../../shared/classes/app-form';
@@ -27,14 +27,28 @@ export class ViewModifyPolicyComponent extends AppForm implements OnInit, OnDest
 
   policies!: RiskProfile;
 
+  updateRequestedForId: string = '';
 
-  constructor(private route: ActivatedRoute, private policyService: PolicyService) { super(); }
+  constructor(private route: ActivatedRoute, private policyMatrixService: PolicyMatrixService, private router: Router) { super(); }
 
 
   ngOnInit(): void {
     const { riskProfiles, policies } = this.route.snapshot.data['value'];
     this.riskProfiles = riskProfiles;
     this.policies = policies;
+
+    this.policyMatrixService.policyMatrixResponse$
+    .pipe(
+      tap(policyMatrixResponse => {
+        if (policyMatrixResponse == null) {
+          return;
+        }
+        this.updateRequestedForId = policyMatrixResponse.id;
+        this.viewModifyPolicyForm.patchValue({...policyMatrixResponse});
+      }),
+      takeUntil(this.destroy$)
+    )
+    .subscribe();
   }
 
   ngOnDestroy(): void {
@@ -64,7 +78,7 @@ export class ViewModifyPolicyComponent extends AppForm implements OnInit, OnDest
     if (this.viewModifyPolicyForm.valid) {
       this.reset();
 
-      this.policyService.createPolicyMatrix(this.viewModifyPolicyForm.getRawValue())
+      this.policyMatrixService.createPolicyMatrix(this.viewModifyPolicyForm.getRawValue())
         .pipe(
           tap((value) => {
             this.processing = false;
@@ -80,6 +94,10 @@ export class ViewModifyPolicyComponent extends AppForm implements OnInit, OnDest
         ).subscribe();
 
     }
+  }
+
+  updatePolicyMatrix(): void {
+    this.policyMatrixService.updatePolicyMatrix(this.updateRequestedForId, this.viewModifyPolicyForm.getRawValue());
   }
 
 }

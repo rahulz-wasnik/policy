@@ -9,9 +9,14 @@ import { PolicyMatrixResponse } from 'src/app/shared/models';
 export class PolicyMatrixDetailsComponent {
 
   @Input() policyMatrix!: PolicyMatrixResponse | null;
-  @Output() deletePolicyMatrixEvent = new EventEmitter<string>;
+  @Output() onDeletePolicyMatrix = new EventEmitter<string>();
+  @Output() onUpdatePolicyMatrix = new EventEmitter<PolicyMatrixResponse>();
   
   deletePolicyMatrix(id: string): void {
-    this.deletePolicyMatrixEvent.next(id);
+    this.onDeletePolicyMatrix.emit(id);
+  }
+
+  updatePolicyMatrix(): void {
+    this.onUpdatePolicyMatrix.emit(this.policyMatrix!);
   }
 }

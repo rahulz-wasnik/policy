@@ -1,13 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { delay, Observable, of } from "rxjs";
-import { environment } from "../../../environments/environment";
-import { Policy, PolicyMatrix, PolicyMatrixResponse } from "../models";
+import { delay, Observable, of, ReplaySubject } from "rxjs";
+import { Policy, PolicyMatrixResponse } from "../models";
 
 @Injectable({
     providedIn: "root"
 })
 export class PolicyService {
+
+    policyMatrixResponse$ = new ReplaySubject<PolicyMatrixResponse | null>(1);
 
     constructor(private http: HttpClient) {}
 
@@ -20,31 +21,5 @@ export class PolicyService {
         //         'Content-Type': 'application/json'
         //     }
         // });
-    }
-
-    createPolicyMatrix(policyMatrix: PolicyMatrix): Observable<string> {
-        return this.http.post<string>(environment.api + "createPolicyMatrix", JSON.stringify(policyMatrix), {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'text/plain'
-            },
-            responseType: 'text' as 'json'
-        });
-    }
-
-    // TODO: To be refactored
-    getPolicyMatrix(id: string): Observable<PolicyMatrixResponse> {
-        return this.http.get<PolicyMatrixResponse>(environment.api + "policyMatrix/" + id);
-    }
-
-    // TODO: To be refactored
-    deletePolicyMatrix(id: string): Observable<string> {
-        return this.http.delete<string>(environment.api + "deletePolicyMatrix/" + id, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'text/plain'
-            },
-            responseType: 'text' as 'json'
-        });
     }
 }

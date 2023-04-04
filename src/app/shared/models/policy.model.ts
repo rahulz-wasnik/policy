@@ -21,8 +21,3 @@ export interface PolicyMatrix {
 export interface PolicyMatrixResponse extends PolicyMatrix {
     id: string;
 }
-
-export interface RequiredPolicyResponse {
-    id: string;
-    policyId: string;
-}

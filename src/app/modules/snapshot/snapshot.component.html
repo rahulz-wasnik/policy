@@ -10,4 +10,7 @@
     </div>
 </div>
 
-<app-policy-matrix-details [policyMatrix]="policyMatrix$ | async" (deletePolicyMatrixEvent)="deletePolicyMatrix($event)"></app-policy-matrix-details>
+<app-policy-matrix-details [policyMatrix]="policyMatrix$ | async" 
+    (onDeletePolicyMatrixEvent)="deletePolicyMatrix($any($event))"
+    (onUpdatePolicyMatrix)="updatePolicyMatrix($event)"
+    ></app-policy-matrix-details>

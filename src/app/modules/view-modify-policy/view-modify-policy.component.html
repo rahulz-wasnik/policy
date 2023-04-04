@@ -62,13 +62,18 @@
         </div>
 
         <div class="button-area">
-            <div *ngIf="processing; else createButton" class="spinner-border text-primary" role="status">
+            <div *ngIf="processing; else buttons" class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
-            <ng-template #createButton>
-                <button type="button" class="btn btn-primary btn-sm" (click)="createPolicyMatrix()">
-                    Create
+            <ng-template #buttons>
+                <button *ngIf="updateRequestedForId else create" type="button" class="btn btn-primary btn-sm" (click)="updatePolicyMatrix()">
+                    Update
                 </button>
+                <ng-template #create>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="createPolicyMatrix()">
+                        Create
+                    </button>
+                </ng-template>
             </ng-template>
         </div>
     </div>
