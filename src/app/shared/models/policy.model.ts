@@ -18,9 +18,8 @@ export interface PolicyMatrix {
     requiredPolicies: Array<string>;
 }
 
-export interface PolicyMatrixResponse extends Omit<PolicyMatrix, "requiredPolicies"> {
+export interface PolicyMatrixResponse extends PolicyMatrix {
     id: string;
-    requiredPolicies: Array<RequiredPolicyResponse>;
 }
 
 export interface RequiredPolicyResponse {
