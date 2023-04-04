@@ -21,8 +21,8 @@ export class PolicyService {
         // });
     }
 
-    createPolicyMatrix(policyMatrix: PolicyMatrix): Observable<String> {
-        return this.http.post<String>(environment.api + "createPolicyMatrix", JSON.stringify(policyMatrix), {
+    createPolicyMatrix(policyMatrix: PolicyMatrix): Observable<string> {
+        return this.http.post<string>(environment.api + "createPolicyMatrix", JSON.stringify(policyMatrix), {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'text/plain'

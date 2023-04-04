@@ -53,9 +53,9 @@ export class ViewModifyPolicyComponent implements OnInit, OnDestroy {
 
     this.policyService.createPolicyMatrix(this.viewModifyPolicyForm.getRawValue())
       .pipe(
-        tap(() => {
+        tap((value) => {
           this.processing = false;
-          this.message = 'Policy matrix created successfully.';
+          this.message = value;
         }),
         catchError(() => {
           this.processing = false;
