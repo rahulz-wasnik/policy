@@ -40,7 +40,13 @@ export class PolicyMatrixService {
     }
 
     // TODO: To be refactored
-    updatePolicyMatrix(id: string, policyMatrix: PolicyMatrix): void {
-        this.http.put(environment.api + URL.POLICY_MATRIX + "/" + id, JSON.stringify(policyMatrix));
+    updatePolicyMatrix(id: string, policyMatrix: PolicyMatrix): Observable<string> {
+        return this.http.put<string>(environment.api + URL.POLICY_MATRIX + "/" + id, JSON.stringify(policyMatrix), {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'text/plain'
+            },
+            responseType: 'text' as 'json'
+        });
     }
 }

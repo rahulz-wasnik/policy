@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { takeUntil, tap, catchError, EMPTY } from 'rxjs';
+import { takeUntil, tap, catchError, EMPTY, finalize } from 'rxjs';
 
 import { PolicyMatrixService } from '../../shared/services/policy-matrix.service';
 import { RiskProfile, ViewModifyForm } from '../../shared/models';
@@ -38,17 +38,17 @@ export class ViewModifyPolicyComponent extends AppForm implements OnInit, OnDest
     this.policies = policies;
 
     this.policyMatrixService.policyMatrixResponse$
-    .pipe(
-      tap(policyMatrixResponse => {
-        if (policyMatrixResponse == null) {
-          return;
-        }
-        this.updateRequestedForId = policyMatrixResponse.id;
-        this.viewModifyPolicyForm.patchValue({...policyMatrixResponse});
-      }),
-      takeUntil(this.destroy$)
-    )
-    .subscribe();
+      .pipe(
+        tap(policyMatrixResponse => {
+          if (policyMatrixResponse == null) {
+            return;
+          }
+          this.updateRequestedForId = policyMatrixResponse.id;
+          this.viewModifyPolicyForm.patchValue({ ...policyMatrixResponse });
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
   ngOnDestroy(): void {
@@ -97,7 +97,24 @@ export class ViewModifyPolicyComponent extends AppForm implements OnInit, OnDest
   }
 
   updatePolicyMatrix(): void {
-    this.policyMatrixService.updatePolicyMatrix(this.updateRequestedForId, this.viewModifyPolicyForm.getRawValue());
+
+    this.reset();
+    this.policyMatrixService.updatePolicyMatrix(this.updateRequestedForId, this.viewModifyPolicyForm.getRawValue())
+      .pipe(
+        tap(() => {
+          this.processing = false;
+          this.message = 'Policy matrix is updated.';
+        }),
+        catchError(() => {
+          this.processing = false;
+          this.hasErrorPostProcessing = true;
+          this.message = 'An error occured during updation.';
+          return EMPTY;
+        }),
+        finalize(() => this.policyMatrixService.policyMatrixResponse$.next(null)),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
 }
