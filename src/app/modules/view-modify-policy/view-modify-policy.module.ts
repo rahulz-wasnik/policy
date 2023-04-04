@@ -8,10 +8,12 @@ import { ViewModifyPolicyComponent } from './view-modify-policy.component';
 import { ViewModifyPolicyResolver } from './view-modify-policy.resolver';
 import { MessageComponent } from 'src/app/shared/components/message/message.component';
 import { FormValidationComponent } from 'src/app/shared/components/form-validation/form-validation.component';
+import { ViewModifyPolicyContainerComponent } from './view-modify-policy-container.component';
 
 
 @NgModule({
   declarations: [
+    ViewModifyPolicyContainerComponent,
     ViewModifyPolicyComponent
   ],
   imports: [
