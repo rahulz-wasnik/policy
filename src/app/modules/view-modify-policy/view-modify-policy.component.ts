@@ -1,19 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { takeUntil, tap, catchError, EMPTY, finalize } from 'rxjs';
 
-import { PolicyMatrixService } from '../../shared/services/policy-matrix.service';
-import { RiskProfile, ViewModifyForm } from '../../shared/models';
+import { PolicyMatrix, PolicyMatrixResponse, ViewModifyForm } from '../../shared/models';
 import { markFormGroupTouched } from 'src/app/shared/utils';
-import { AppForm } from '../../shared/classes/app-form';
+import { ViewModifyFormState } from './view-modify-policy-container.component';
 
 @Component({
   selector: 'app-view-modify-policy',
   templateUrl: './view-modify-policy.component.html',
   styleUrls: ['./view-modify-policy.component.scss']
 })
-export class ViewModifyPolicyComponent extends AppForm implements OnInit, OnDestroy {
+export class ViewModifyPolicyComponent implements OnChanges {
+
+  @Input() appFormState!: ViewModifyFormState;
+  @Output() onCreatePolicyMatrix = new EventEmitter<PolicyMatrix>();
+  @Output() onUpdatePolicyMatrix = new EventEmitter<PolicyMatrixResponse>();
+
+  policyMatrixResponse!: PolicyMatrixResponse;
 
   viewModifyPolicyForm: FormGroup<ViewModifyForm> = new FormGroup<ViewModifyForm>({
     applicationType: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
@@ -21,39 +24,6 @@ export class ViewModifyPolicyComponent extends AppForm implements OnInit, OnDest
     riskProfile: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     requiredPolicies: new FormControl([], { nonNullable: true, validators: [Validators.required] }),
   });
-
-
-  riskProfiles!: RiskProfile;
-
-  policies!: RiskProfile;
-
-  updateRequestedForId: string = '';
-
-  constructor(private route: ActivatedRoute, private policyMatrixService: PolicyMatrixService, private router: Router) { super(); }
-
-
-  ngOnInit(): void {
-    const { riskProfiles, policies } = this.route.snapshot.data['value'];
-    this.riskProfiles = riskProfiles;
-    this.policies = policies;
-
-    this.policyMatrixService.policyMatrixResponse$
-      .pipe(
-        tap(policyMatrixResponse => {
-          if (policyMatrixResponse == null) {
-            return;
-          }
-          this.updateRequestedForId = policyMatrixResponse.id;
-          this.viewModifyPolicyForm.patchValue({ ...policyMatrixResponse });
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
-  }
-
-  ngOnDestroy(): void {
-    this.beforeComponentDestroy();
-  }
 
   get applicationType(): FormControl {
     return this.viewModifyPolicyForm.get('applicationType') as FormControl;
@@ -71,50 +41,30 @@ export class ViewModifyPolicyComponent extends AppForm implements OnInit, OnDest
     return this.viewModifyPolicyForm.get('requiredPolicies') as FormControl;
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['appFormState']?.currentValue?.policyMatrixResponse) {
+      this.policyMatrixResponse = changes['appFormState'].currentValue.policyMatrixResponse;
+      this.viewModifyPolicyForm.patchValue({
+        ...this.policyMatrixResponse
+      });
+    }
+  }
+
   createPolicyMatrix(): void {
-
     markFormGroupTouched(this.viewModifyPolicyForm);
-
     if (this.viewModifyPolicyForm.valid) {
-      this.reset();
-
-      this.policyMatrixService.createPolicyMatrix(this.viewModifyPolicyForm.getRawValue())
-        .pipe(
-          tap((value) => {
-            this.processing = false;
-            this.message = value;
-          }),
-          catchError(() => {
-            this.processing = false;
-            this.hasErrorPostProcessing = true;
-            this.message = 'An error occured during creation.';
-            return EMPTY;
-          }),
-          takeUntil(this.destroy$),
-        ).subscribe();
-
+      this.onCreatePolicyMatrix.emit(this.viewModifyPolicyForm.getRawValue());
     }
   }
 
   updatePolicyMatrix(): void {
-
-    this.reset();
-    this.policyMatrixService.updatePolicyMatrix(this.updateRequestedForId, this.viewModifyPolicyForm.getRawValue())
-      .pipe(
-        tap(() => {
-          this.processing = false;
-          this.message = 'Policy matrix is updated.';
-        }),
-        catchError(() => {
-          this.processing = false;
-          this.hasErrorPostProcessing = true;
-          this.message = 'An error occured during updation.';
-          return EMPTY;
-        }),
-        finalize(() => this.policyMatrixService.policyMatrixResponse$.next(null)),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
+    markFormGroupTouched(this.viewModifyPolicyForm);
+    if (this.viewModifyPolicyForm.valid) {
+      this.onUpdatePolicyMatrix.emit({
+        id: this.policyMatrixResponse.id,
+        ...this.viewModifyPolicyForm.getRawValue()
+      });
+    }
   }
 
 }

@@ -5,10 +5,10 @@ import { Injectable } from "@angular/core";
 
 import { environment } from '../../../environments/environment';
 
-import { RequiredPolicies, RiskProfile } from "../../shared/models";
+import { RequiredPolicies, RiskProfiles } from "../../shared/models";
 
 export type RiskProfileAndRequiredPolicies = {
-    riskProfiles: RiskProfile,
+    riskProfiles: RiskProfiles,
     policies: RequiredPolicies
 };
 
@@ -52,7 +52,7 @@ const policies: RequiredPolicies = [
     }
 ];
 
-const riskProfiles: RiskProfile = [
+const riskProfiles: RiskProfiles = [
     {
         label: 'A1R1',
         value: 'A1R1'
