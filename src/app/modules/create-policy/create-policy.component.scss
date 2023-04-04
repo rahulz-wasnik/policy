@@ -12,8 +12,6 @@
     grid-template-columns: max-content 1fr;
     grid-gap: app-variables.$spacing-40;
 
-    align-items: center;
-
     grid-template-areas:    
     "message message"
     "label control"

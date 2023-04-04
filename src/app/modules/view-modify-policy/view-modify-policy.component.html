@@ -8,46 +8,57 @@
             <label for="applicationType">Application type</label>
         </div>
         <div>
-            <select aria-label="Select phase" formControlName="applicationType" class="form-select">
+            <select aria-label="Select phase" formControlName="applicationType" class="form-select"
+                [class.border-danger]="applicationType.invalid && (applicationType.dirty || applicationType.touched)">
                 <option value=""></option>
                 <option value="A1">A1</option>
                 <option value="A2">A2</option>
                 <option value="A3">A3</option>
                 <option value="A4">A4</option>
             </select>
+            <app-form-validation [appControl]="applicationType"
+                errorMessage="Application type is required."></app-form-validation>
         </div>
 
         <div>
             <label for="releaseType">Release type</label>
         </div>
         <div>
-            <select aria-label="Select phase" formControlName="releaseType" class="form-select">
+            <select aria-label="Select phase" formControlName="releaseType" class="form-select"
+                [class.border-danger]="releaseType.invalid && (releaseType.dirty || releaseType.touched)">
                 <option value=""></option>
                 <option value="Solution launch">Solution launch</option>
                 <option value="Major">Major</option>
                 <option value="Minor">Minor</option>
                 <option value="Hotfix">Hotfix</option>
             </select>
+            <app-form-validation [appControl]="releaseType"
+                errorMessage="Release type is required."></app-form-validation>
         </div>
 
         <div>
             <label for="riskProfile">Risk profile</label>
         </div>
         <div>
-            <select aria-label="Select phase" formControlName="riskProfile" class="form-select">
+            <select aria-label="Select phase" formControlName="riskProfile" class="form-select"
+                [class.border-danger]="riskProfile.invalid && (riskProfile.dirty || riskProfile.touched)">
                 <option value=""></option>
                 <option *ngFor="let riskProfile of riskProfiles;" value="{{riskProfile.label}}">{{ riskProfile.value }}
                 </option>
             </select>
+            <app-form-validation [appControl]="riskProfile"
+                errorMessage="Risk profile is required."></app-form-validation>
         </div>
 
         <div>
             <label for="requiredPolicies">Required policies</label>
         </div>
         <div>
-            <ng-select [items]="policies" bindLabel="label" bindValue="value" formControlName="requiredPolicies"
-                [multiple]="true">
+            <ng-select [items]="policies" bindLabel="label" bindValue="value" formControlName="requiredPolicies" labelForId="requiredPolicies"
+                [multiple]="true" [class.border-danger]="requiredPolicies.invalid && (requiredPolicies.dirty || requiredPolicies.touched)">
             </ng-select>
+            <app-form-validation [appControl]="requiredPolicies"
+                errorMessage="Required policies is required."></app-form-validation>
         </div>
 
         <div class="button-area">

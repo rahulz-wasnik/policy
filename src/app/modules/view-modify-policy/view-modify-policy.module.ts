@@ -7,6 +7,7 @@ import { ViewModifyPolicyRoutingModule } from './view-modify-policy-routing.modu
 import { ViewModifyPolicyComponent } from './view-modify-policy.component';
 import { ViewModifyPolicyResolver } from './view-modify-policy.resolver';
 import { MessageComponent } from 'src/app/shared/components/message/message.component';
+import { FormValidationComponent } from 'src/app/shared/components/form-validation/form-validation.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { MessageComponent } from 'src/app/shared/components/message/message.comp
     ViewModifyPolicyRoutingModule,
     ReactiveFormsModule,
     NgSelectModule,
-    MessageComponent
+    MessageComponent,
+    FormValidationComponent
   ],
   providers: [
     ViewModifyPolicyResolver

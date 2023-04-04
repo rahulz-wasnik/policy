@@ -53,3 +53,7 @@ body,
         @extend %msg-container;
     }
 }
+
+ng-select.ng-invalid.ng-touched .ng-select-container {
+    border-color: bootstrap.$danger;
+}
