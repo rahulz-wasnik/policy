@@ -11,7 +11,7 @@ export interface ViewModifyFormState extends AppFormState {
     policies: RequiredPolicies;
 }
 
-export const INITIAL_APP_FORM_STATE: ViewModifyFormState = {
+export const initialAppFormState: ViewModifyFormState = {
     policyMatrixResponse: null,
     processing: false,
     hasError: false,
@@ -33,7 +33,7 @@ export const INITIAL_APP_FORM_STATE: ViewModifyFormState = {
 })
 export class ViewModifyPolicyContainerComponent implements OnInit, OnDestroy {
 
-    appFormState$ = new BehaviorSubject<ViewModifyFormState>(INITIAL_APP_FORM_STATE);
+    appFormState$ = new BehaviorSubject<ViewModifyFormState>(initialAppFormState);
 
     protected destroy$ = new Subject<boolean>();
 

@@ -9,7 +9,7 @@ export interface CreatePolicyFormState extends AppFormState {
     phases: PolicyPhases;
 };
 
-const INITAIL_APP_FORM_STATE: CreatePolicyFormState = {
+const initialAppFormState: CreatePolicyFormState = {
     processing: false,
     hasError: false,
     message: '',
@@ -28,7 +28,7 @@ const INITAIL_APP_FORM_STATE: CreatePolicyFormState = {
 })
 export class CreatePolicyContainerComponent implements OnInit, OnDestroy {
 
-    appFormState$ = new BehaviorSubject<CreatePolicyFormState>(INITAIL_APP_FORM_STATE);
+    appFormState$ = new BehaviorSubject<CreatePolicyFormState>(initialAppFormState);
 
     private destroy$ = new Subject<boolean>();
 

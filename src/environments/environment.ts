@@ -3,6 +3,6 @@ export const environment = {
     api: 'api/'
 };
 
-export const URL = {
+export const url = {
     POLICY_MATRIX: 'policyMatrix'
 };
