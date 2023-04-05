@@ -74,7 +74,9 @@ export class ViewModifyPolicyContainerComponent implements OnInit, OnDestroy {
 
         this.appFormState$.next({
             ...this.appFormState$.value,
-            processing: true
+            processing: true,
+            message: '',
+            hasError: false
         });
 
         this.policyMatrixService.createPolicyMatrix(policyMatrix)
