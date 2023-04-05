@@ -1,25 +1,16 @@
 import { HttpClient } from "@angular/common/http";
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Injectable } from "@angular/core";
 
-import { environment } from '../../../environments/environment';
-
-import { PolicyPhase } from "../../shared/models";
+import { PolicyPhases } from "src/app/shared/models";
 
 @Injectable()
-export class CreatePolicyResolver implements Resolve<PolicyPhase | boolean> {
+export class CreatePolicyResolver implements Resolve<PolicyPhases> {
    
     constructor(private http: HttpClient, private router: Router) {}
     
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PolicyPhase | boolean> {
-
-        const value: PolicyPhase = [
-            {
-                label: 'a',
-                value: 'a'
-            }
-        ];
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PolicyPhases> {
 
         return of(value);
         // TODO: Add logic for fetching data from the backend
@@ -27,6 +18,11 @@ export class CreatePolicyResolver implements Resolve<PolicyPhase | boolean> {
         //     catchError(err => this.router.navigate(["/error"]))
         // );
     }
-
-    
 }
+
+const value: PolicyPhases = [
+    {
+        label: 'a',
+        value: 'a'
+    }
+];

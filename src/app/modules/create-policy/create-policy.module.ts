@@ -7,10 +7,12 @@ import { CreatePolicyComponent } from './create-policy.component';
 import { CreatePolicyResolver } from './create-policy.resolver';
 import { FormValidationComponent } from '../../shared/components/form-validation/form-validation.component';
 import { MessageComponent } from '../../shared/components/message/message.component';
+import { CreatePolicyContainerComponent } from './create-policy-container.component';
 
 
 @NgModule({
   declarations: [
+    CreatePolicyContainerComponent,
     CreatePolicyComponent
   ],
   imports: [

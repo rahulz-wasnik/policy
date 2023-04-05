@@ -1,7 +1,7 @@
 <form [formGroup]="createPolicyForm">
     <div class="content">
         <div class="message-area">
-            <app-message [hasError]="hasErrorPostProcessing" [message]="message"></app-message>
+            <app-message [hasError]="appFormState.hasError" [message]="appFormState.message"></app-message>
         </div>
 
         <div>
@@ -11,7 +11,7 @@
             <select aria-label="Select phase" formControlName="phase" class="form-select"
                     [class.border-danger]="phase.invalid && (phase.dirty || phase.touched)">
                     <option value=""></option>
-                    <option *ngFor="let phase of phases;" value="{{phase.label}}">{{ phase.value }}</option>
+                    <option *ngFor="let phase of appFormState.phases;" value="{{phase.label}}">{{ phase.value }}</option>
                 </select>
                 <app-form-validation [appControl]="phase"
                     errorMessage="Policy phase is required."></app-form-validation>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="button-area">
-            <div *ngIf="processing; else createButton" class="spinner-border text-primary" role="status">
+            <div *ngIf="appFormState.processing; else createButton" class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
             <ng-template #createButton>
