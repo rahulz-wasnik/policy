@@ -8,7 +8,6 @@
 *::before {
     margin: 0;
     padding: 0;
-    box-sizing: inherit;
 }
 
 html {
@@ -20,6 +19,8 @@ body,
 .form-select {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
+    font-size: app-variables.$font-size-md;
+    color: app-variables.$dark-400;
 }
 
 
@@ -56,4 +57,25 @@ body,
 
 ng-select.ng-invalid.ng-touched .ng-select-container {
     border-color: bootstrap.$danger;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    padding-bottom: app-variables.$spacing-6;
+}
+
+a {
+    color: app-variables.$link-color;
+    text-decoration: none;
+
+    &:hover {
+        color: app-variables.$link-color-hover;
+    }
+
+    &.active {
+        color: app-variables.$link-color-active;
+    }
 }

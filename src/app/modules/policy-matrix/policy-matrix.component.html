@@ -1,4 +1,4 @@
-<form [formGroup]="viewModifyPolicyForm">
+<form [formGroup]="appForm">
     <div class="content">
         <div class="message-area">
             <app-message [hasError]="appFormState.hasError" [message]="appFormState.message"></app-message>
@@ -78,7 +78,3 @@
         </div>
     </div>
 </form>
-
-<div>
-    Value - {{ viewModifyPolicyForm.value | json }}
-</div>

@@ -14,11 +14,11 @@ export type RiskProfileAndRequiredPolicies = {
 
 
 @Injectable()
-export class ViewModifyPolicyResolver implements Resolve<RiskProfileAndRequiredPolicies | boolean> {
+export class PolicyMatrixResolver implements Resolve<RiskProfileAndRequiredPolicies> {
    
     constructor(private http: HttpClient, private router: Router) {}
     
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RiskProfileAndRequiredPolicies | boolean> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RiskProfileAndRequiredPolicies> {
 
         return of(testData);
         // TODO: Add logic for fetching data from the backend

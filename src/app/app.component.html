@@ -1,7 +1,11 @@
-<section id="heading">
-  <app-header></app-header>
-</section>
-
-<section id="main-content">
-  <router-outlet></router-outlet>
-</section>
+<div class="layout">
+  <section id="header">
+    <app-header></app-header>
+  </section>
+  <section id="sidebar">
+    <app-sidebar></app-sidebar>
+  </section>
+  <section id="content">
+      <router-outlet></router-outlet>
+  </section>
+</div>

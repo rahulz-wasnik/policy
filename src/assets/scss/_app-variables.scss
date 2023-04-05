@@ -13,6 +13,24 @@ $spacing-40: 2.5rem; //40px
 $spacing-64: 4rem; //64px
 
 // Font scale
-$font-size-sm: 10px;
-$font-size-md: 14px;
-$font-size-lg: 18px;
+$font-size-sm: 0.625rem; //10px
+$font-size-md: 0.875rem; //14px
+$font-size-lg: 1.125rem; //18px
+
+// Colors
+$white: #ffffff;
+$grey-100: #e6e6e6;
+$grey-200: #cccccc;
+$grey-300: #b3b3b3;
+$grey-400: #999999;
+$grey-500: #808080;
+
+$dark-100: #666666;
+$dark-200: #4d4d4d;
+$dark-300: #333333;
+$dark-400: #1a1a1a;
+$black: #000000;
+
+$link-color: $grey-500;
+$link-color-hover: $dark-200;
+$link-color-active: $dark-400;

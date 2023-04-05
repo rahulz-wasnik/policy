@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil, tap, catchError, EMPTY, finalize, BehaviorSubject, Subject } from 'rxjs';
+import { PolicyMatrixService } from 'src/app/shared/services/policy-matrix.service';
 
-import { PolicyMatrixService } from '../../shared/services/policy-matrix.service';
 import { AppFormState, PolicyMatrix, PolicyMatrixResponse, RequiredPolicies, RiskProfiles } from '../../shared/models';
 
 export interface ViewModifyFormState extends AppFormState {
@@ -21,17 +21,17 @@ export const initialAppFormState: ViewModifyFormState = {
 };
 
 @Component({
-    selector: 'app-view-modify-policy-container',
+    selector: 'app-policy-matrix-container',
     template: `
-    <app-view-modify-policy
+    <app-policy-matrix
         [appFormState] = "(appFormState$ | async)!"
         (onCreatePolicyMatrix)="createPolicyMatrix($event)"
         (onUpdatePolicyMatrix)="updatePolicyMatrix($event)"
-    ></app-view-modify-policy>
+    ></app-policy-matrix>
   `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ViewModifyPolicyContainerComponent implements OnInit, OnDestroy {
+export class PolicyMatrixContainerComponent implements OnInit, OnDestroy {
 
     appFormState$ = new BehaviorSubject<ViewModifyFormState>(initialAppFormState);
 

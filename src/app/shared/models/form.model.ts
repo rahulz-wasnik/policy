@@ -6,7 +6,7 @@ export interface PolicyForm {
     description: FormControl<string>;
 };
 
-export interface ViewModifyForm {
+export interface ViewModifyPolicyMatrixForm {
     applicationType: FormControl<string>;
     releaseType: FormControl<string>;
     riskProfile: FormControl<string>;
