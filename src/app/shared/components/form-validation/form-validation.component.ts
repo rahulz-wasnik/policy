@@ -12,6 +12,7 @@ import { SvgAlertComponent } from '../../svgs/svg-alert.component';
 })
 export class FormValidationComponent {
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() appControl!: FormControl<any>; 
   @Input() errorMessage!: string;
 }

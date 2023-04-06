@@ -10,6 +10,7 @@ export class CreatePolicyResolver implements Resolve<PolicyPhases> {
    
     constructor(private http: HttpClient, private router: Router) {}
     
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PolicyPhases> {
 
         return of(value);

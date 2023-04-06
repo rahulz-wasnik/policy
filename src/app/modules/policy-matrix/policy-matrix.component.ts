@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AppFormState, PolicyMatrix, PolicyMatrixResponse, RequiredPolicies, RiskProfiles, ViewModifyPolicyMatrixForm } from '../../shared/models';
@@ -18,8 +18,8 @@ export interface CreateModifyFormState extends AppFormState {
 export class PolicyMatrixComponent implements OnChanges {
 
   @Input() appFormState!: CreateModifyFormState;
-  @Output() onCreatePolicyMatrix = new EventEmitter<PolicyMatrix>();
-  @Output() onUpdatePolicyMatrix = new EventEmitter<PolicyMatrixResponse>();
+  @Output() createPolicyMatrixEvent = new EventEmitter<PolicyMatrix>();
+  @Output() updatePolicyMatrixEvent = new EventEmitter<PolicyMatrixResponse>();
 
   policyMatrixResponse!: PolicyMatrixResponse;
 
@@ -58,14 +58,14 @@ export class PolicyMatrixComponent implements OnChanges {
   createPolicyMatrix(): void {
     markFormGroupTouched(this.appForm);
     if (this.appForm.valid) {
-      this.onCreatePolicyMatrix.emit(this.appForm.getRawValue());
+      this.createPolicyMatrixEvent.emit(this.appForm.getRawValue());
     }
   }
 
   updatePolicyMatrix(): void {
     markFormGroupTouched(this.appForm);
     if (this.appForm.valid) {
-      this.onUpdatePolicyMatrix.emit({
+      this.updatePolicyMatrixEvent.emit({
         id: this.policyMatrixResponse.id,
         ...this.appForm.getRawValue()
       });

@@ -21,7 +21,7 @@ export const initialAppFormState: CreateModifyFormState = {
     template: `
     <app-policy-matrix
         [appFormState] = "(appFormState$ | async)!"
-        (onUpdatePolicyMatrix)="updatePolicyMatrix($event)"
+        (updatePolicyMatrixEvent)="updatePolicyMatrix($event)"
     ></app-policy-matrix>
   `,
     changeDetection: ChangeDetectionStrategy.OnPush

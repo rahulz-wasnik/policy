@@ -13,7 +13,7 @@ import { CreatePolicyFormState } from './create-policy-container.component';
 export class CreatePolicyComponent {
 
   @Input() appFormState!: CreatePolicyFormState;
-  @Output() onCreatePolicy = new EventEmitter<Policy>();
+  @Output() createPolicyEvent = new EventEmitter<Policy>();
 
   createPolicyForm: FormGroup<PolicyForm> = new FormGroup<PolicyForm>({
     phase: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
@@ -34,7 +34,7 @@ export class CreatePolicyComponent {
     markFormGroupTouched(this.createPolicyForm);
 
     if (this.createPolicyForm.valid) {
-      this.onCreatePolicy.emit(this.createPolicyForm.getRawValue());
+      this.createPolicyEvent.emit(this.createPolicyForm.getRawValue());
     }
   }
 

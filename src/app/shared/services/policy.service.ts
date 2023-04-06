@@ -13,6 +13,8 @@ export class PolicyService {
     constructor(private http: HttpClient) {}
 
     // TODO: To be refactored
+    // TODO: Remove the disable es lint rule
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     createPolicy(policy: Policy): Observable<boolean> {
         return of(true).pipe(delay(1000));
         // TODO: Add the backend logic to submit the policy

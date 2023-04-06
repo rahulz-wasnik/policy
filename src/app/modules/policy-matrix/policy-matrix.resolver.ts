@@ -1,9 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
-import { Observable, catchError, of, forkJoin, map } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Injectable } from "@angular/core";
-
-import { environment } from '../../../environments/environment';
 
 import { RequiredPolicies, RiskProfiles } from "../../shared/models";
 
@@ -18,6 +16,7 @@ export class PolicyMatrixResolver implements Resolve<RiskProfileAndRequiredPolic
    
     constructor(private http: HttpClient, private router: Router) {}
     
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RiskProfileAndRequiredPolicies> {
 
         return of(testData);

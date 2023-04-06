@@ -7,7 +7,7 @@ import { PolicyService } from '../../shared/services/policy.service';
 
 export interface CreatePolicyFormState extends AppFormState {
     phases: PolicyPhases;
-};
+}
 
 const initialAppFormState: CreatePolicyFormState = {
     processing: false,
@@ -21,7 +21,7 @@ const initialAppFormState: CreatePolicyFormState = {
     template: `
         <app-create-policy
             [appFormState] = "(appFormState$ | async)!"
-            (onCreatePolicy) = "createPolicy($event)"
+            (createPolicyEvent) = "createPolicy($event)"
         ></app-create-policy>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -11,18 +11,18 @@ export class ViewPolicyMatricesComponent {
 
   @Input() state!: ViewPolicyMatricesState;
 
-  @Output() onDeletePolicyMatrix = new EventEmitter<number>();
-  @Output() onUpdatePolicyMatrix = new EventEmitter<PolicyMatrixResponse>();
+  @Output() deletePolicyMatrixEvent = new EventEmitter<number>();
+  @Output() updatePolicyMatrixEvent = new EventEmitter<PolicyMatrixResponse>();
 
   trackById(index: number, item: PolicyMatrixResponse): number {
     return item.id;
   }
 
   deletePolicyMatrix(id: number): void {
-    this.onDeletePolicyMatrix.emit(id);
+    this.deletePolicyMatrixEvent.emit(id);
   }
 
   updatePolicyMatrix(policyMatrix: PolicyMatrixResponse): void {
-    this.onUpdatePolicyMatrix.emit(policyMatrix);
+    this.updatePolicyMatrixEvent.emit(policyMatrix);
   }
 }

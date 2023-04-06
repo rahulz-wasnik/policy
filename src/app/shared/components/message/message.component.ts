@@ -12,6 +12,6 @@ import { SvgSuccessComponent } from '../../svgs/svg-success.component';
 })
 export class MessageComponent {
 
-  @Input() hasError: boolean = false;
-  @Input() message: string = '';
+  @Input() hasError = false;
+  @Input() message = '';
 }

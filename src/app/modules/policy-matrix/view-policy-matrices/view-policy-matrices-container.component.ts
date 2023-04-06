@@ -27,8 +27,8 @@ export const initialState: ViewPolicyMatricesState = {
     template: `
         <app-view-policy-matrices
             [state]="(state$ | async)!"
-            (onDeletePolicyMatrix)="deletePolicyMatrix($event)" 
-            (onUpdatePolicyMatrix)="updatePolicyMatrix($event)" 
+            (deletePolicyMatrixEvent)="deletePolicyMatrix($event)" 
+            (updatePolicyMatrixEvent)="updatePolicyMatrix($event)" 
         ></app-view-policy-matrices>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { takeUntil, tap, catchError, EMPTY, finalize, BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil, tap, catchError, EMPTY, BehaviorSubject, Subject } from 'rxjs';
 import { PolicyMatrixService } from 'src/app/shared/services/policy-matrix.service';
 
 import { PolicyMatrix } from '../../../shared/models';
@@ -21,7 +21,7 @@ export const initialAppFormState: CreateModifyFormState = {
     template: `
     <app-policy-matrix
         [appFormState] = "(appFormState$ | async)!"
-        (onCreatePolicyMatrix)="createPolicyMatrix($event)"
+        (createPolicyMatrixEvent)="createPolicyMatrix($event)"
     ></app-policy-matrix>
   `,
     changeDetection: ChangeDetectionStrategy.OnPush
