@@ -35,9 +35,14 @@
 </div>
 
 <ng-template #processing>
-  <div class="progress-spinner-container">
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
+  <div *ngIf="state.hasError; else fetchingDetails">
+    <app-message [hasError]="state.hasError" [message]="state.message"></app-message>
   </div>
+  <ng-template #fetchingDetails>
+    <div class="progress-spinner-container">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </ng-template>
 </ng-template>
