@@ -1,0 +1,43 @@
+
+<div *ngIf="state.policyMatrices.length; else processing" class="content-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Application Type</th>
+        <th>Release Type</th>
+        <th>Risk profiles</th>
+        <th>Required policies</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let policyMatrix of state.policyMatrices; trackBy: trackById">
+        <td>{{ policyMatrix.id }}</td>
+        <td>{{ policyMatrix.applicationType }}</td>
+        <td>{{ policyMatrix.releaseType }}</td>
+        <td>{{ policyMatrix.riskProfile }}</td>
+        <td>
+          <ul *ngFor="let policy of policyMatrix.requiredPolicies">
+            <li> {{ policy }} </li>
+          </ul>
+        </td>
+        <td>
+          <button type="button" class="app-button-icon app-button-danger"
+            (click)="deletePolicyMatrix(policyMatrix.id)"><app-svg-cancel></app-svg-cancel></button>
+          <div *ngIf="state.idToDelete === policyMatrix.id">
+            <app-message [hasError]="state.hasError" [message]="state.message"></app-message>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #processing>
+  <div class="progress-spinner-container">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</ng-template>

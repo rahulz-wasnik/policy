@@ -128,7 +128,7 @@ export class PolicyMatrixContainerComponent implements OnInit, OnDestroy {
                         ...this.appFormState$.value,
                         hasError: true,
                         processing: false,
-                        message: 'Error occured during creation.'
+                        message: 'An error occured.'
                     });
                     return EMPTY;
                 }),

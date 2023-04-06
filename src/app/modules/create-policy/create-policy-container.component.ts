@@ -73,7 +73,7 @@ export class CreatePolicyContainerComponent implements OnInit, OnDestroy {
                         ...this.appFormState$.value,
                         processing: false,
                         hasError: true,
-                        message: 'An error occured during creation.'
+                        message: 'An error occured.'
                     });
 
                     return EMPTY;

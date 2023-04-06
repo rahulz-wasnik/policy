@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, ReplaySubject } from "rxjs";
+import { delay, Observable, ReplaySubject } from "rxjs";
 import { environment, url } from "../../../environments/environment";
 import { PolicyMatrix, PolicyMatrixResponse } from "../models";
 
@@ -13,6 +13,10 @@ export class PolicyMatrixService {
 
     constructor(private http: HttpClient) {}
 
+    getPolicyMatrices(): Observable<PolicyMatrixResponse[]> {
+        return this.http.get<PolicyMatrixResponse[]>(environment.api + url.POLICY_MATRIX);
+    }
+
     createPolicyMatrix(policyMatrix: PolicyMatrix): Observable<string> {
         return this.http.post<string>(environment.api + url.POLICY_MATRIX, JSON.stringify(policyMatrix), {
             headers: {
@@ -24,12 +28,12 @@ export class PolicyMatrixService {
     }
 
     // TODO: To be refactored
-    getPolicyMatrix(id: string): Observable<PolicyMatrixResponse> {
+    getPolicyMatrix(id: number): Observable<PolicyMatrixResponse> {
         return this.http.get<PolicyMatrixResponse>(environment.api + url.POLICY_MATRIX + "/" + id);
     }
 
     // TODO: To be refactored
-    deletePolicyMatrix(id: string): Observable<string> {
+    deletePolicyMatrix(id: number): Observable<string> {
         return this.http.delete<string>(environment.api + url.POLICY_MATRIX + "/" + id, {
             headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +44,7 @@ export class PolicyMatrixService {
     }
 
     // TODO: To be refactored
-    updatePolicyMatrix(id: string, policyMatrix: PolicyMatrix): Observable<string> {
+    updatePolicyMatrix(id: number, policyMatrix: PolicyMatrix): Observable<string> {
         return this.http.put<string>(environment.api + url.POLICY_MATRIX + "/" + id, JSON.stringify(policyMatrix), {
             headers: {
                 'Content-Type': 'application/json',

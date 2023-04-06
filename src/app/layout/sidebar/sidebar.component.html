@@ -1,13 +1,15 @@
-<ul class="list">
-    <li class="list-item">
-        <a class="list-link" [routerLinkActive]="['active']" aria-current="page" routerLink="/{{createPolicy}}">Create
+<ul>
+    <li>
+        <a [routerLinkActive]="['active']" aria-current="page" routerLink="/{{createPolicy}}">Create
             policy</a>
     </li>
-    <li class="list-item">
-        <a class="list-link" [routerLinkActive]="['active']" routerLink="/{{createPolicyMatrix}}">Create policy
+    <li>
+        <a [routerLinkActive]="['active']" routerLink="/{{createPolicyMatrix}}">Create policy
             matrix</a>
     </li>
-    <!-- <li class="list-item">
-        <a class="list-link" [routerLinkActive]="['active']" routerLink="/snapshot">View policy matrix</a>
-    </li> -->
+    <li>
+        <a [routerLinkActive]="['active']" routerLink="/{{viewModifyPolicyMatrix}}">View modify policy
+            matrix
+        </a>
+    </li>
 </ul>

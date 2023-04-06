@@ -9,12 +9,17 @@ import { PolicyMatrixContainerComponent } from './policy-matrix-container.compon
 import { MessageComponent } from '../../shared/components/message/message.component';
 import { FormValidationComponent } from '../../shared/components/form-validation/form-validation.component';
 import { PolicyMatrixResolver } from './policy-matrix.resolver';
+import { ViewModifyPolicyMatrixComponent } from './view-modify-policy-matrix/view-modify-policy-matrix.component';
+import { ViewModifyPolicyMatrixContainerComponent } from './view-modify-policy-matrix/view-modify-policy-matrix-container.component';
+import { SvgCancelComponent } from 'src/app/shared/svgs/svg-cancel.component';
 
 
 @NgModule({
   declarations: [
     PolicyMatrixContainerComponent,
-    PolicyMatrixComponent
+    PolicyMatrixComponent,
+    ViewModifyPolicyMatrixContainerComponent,
+    ViewModifyPolicyMatrixComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +27,8 @@ import { PolicyMatrixResolver } from './policy-matrix.resolver';
     ReactiveFormsModule,
     NgSelectModule,
     MessageComponent,
-    FormValidationComponent
+    FormValidationComponent,
+    SvgCancelComponent
   ],
   providers: [
     PolicyMatrixResolver

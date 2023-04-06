@@ -19,5 +19,5 @@ export interface PolicyMatrix {
 }
 
 export interface PolicyMatrixResponse extends PolicyMatrix {
-    id: string;
+    id: number;
 }

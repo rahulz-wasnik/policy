@@ -13,24 +13,62 @@ $spacing-40: 2.5rem; //40px
 $spacing-64: 4rem; //64px
 
 // Font scale
-$font-size-sm: 0.625rem; //10px
-$font-size-md: 0.875rem; //14px
-$font-size-lg: 1.125rem; //18px
+$font-size-small: 0.625rem; //10px
+$font-size-medium: 0.875rem; //14px
+$font-size-large: 1.125rem; //18px
+
+// Border
+$border-small: 0.25px;
+$border-medium: 0.5px;
+$border-regular: 1px;
+$border-large: 2px;
+
 
 // Colors
+// Gray scale
 $white: #ffffff;
 $grey-100: #e6e6e6;
 $grey-200: #cccccc;
 $grey-300: #b3b3b3;
 $grey-400: #999999;
 $grey-500: #808080;
-
-$dark-100: #666666;
-$dark-200: #4d4d4d;
-$dark-300: #333333;
-$dark-400: #1a1a1a;
+$grey-600: #666666;
+$grey-700: #4d4d4d;
+$grey-800: #333333;
+$grey-900: #1a1a1a;
 $black: #000000;
 
+// Danger color scale
+$red-100: #ffcccc;
+$red-200: #ff9999;
+$red-300: #ff6666;
+$red-400: #ff0000;
+$red-500: #ff0000;
+$red-600: #cc0000;
+$red-700: #990000;
+$red-800: #660000;
+
+// Success color scale
+$green-100: #66cc66;
+$green-200: #40bf40;
+$green-300: #339933;
+$green-400: #267326;
+$green-500: #194d19;
+
+
+$color-base:$grey-500;
+$color-disabled: $grey-400;
+$color-danger: $red-500;
+$color-danger-hover: $red-600;
+$color-danger-active: $red-700;
+$color-success: $green-300;
+$color-success-hover: $green-400;
+$color-success-active: $green-500;
+
+// Link colors
 $link-color: $grey-500;
-$link-color-hover: $dark-200;
-$link-color-active: $dark-400;
+$link-color-hover: $grey-600;
+$link-color-active: $grey-700;
+$link-color-disabled: $color-disabled;
+
+

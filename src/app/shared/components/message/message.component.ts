@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AlertComponent } from '../../svgs/alert/alert.component';
-import { SuccessComponent } from '../../svgs/success/success.component';
+import { SvgAlertComponent } from '../../svgs/svg-alert.component';
+import { SvgSuccessComponent } from '../../svgs/svg-success.component';
 
 @Component({
   selector: 'app-message',
   standalone: true,
-  imports: [CommonModule, AlertComponent, SuccessComponent],
+  imports: [CommonModule, SvgAlertComponent, SvgSuccessComponent],
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss']
 })

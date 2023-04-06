@@ -1,4 +1,5 @@
 @use './app-variables';
+@use './app-button';
 @use 'bootstrap/scss/bootstrap.scss';
 @import '@ng-select/ng-select/themes/default.theme.css';
 
@@ -19,13 +20,13 @@ body,
 .form-select {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    font-size: app-variables.$font-size-md;
-    color: app-variables.$dark-400;
+    font-size: app-variables.$font-size-medium;
+    color: app-variables.$color-base;
 }
 
 
 %msg-text {
-    font-size: app-variables.$font-size-md;
+    font-size: app-variables.$font-size-medium;
     margin-left:  app-variables.$spacing-4;
     margin-right:  app-variables.$spacing-4;
 }
@@ -46,7 +47,7 @@ body,
 }
 
 .success {
-    color: bootstrap.$success;
+    color: app-variables.$color-success;
     &-text {
         @extend %msg-text;
     }
@@ -56,7 +57,7 @@ body,
 }
 
 ng-select.ng-invalid.ng-touched .ng-select-container {
-    border-color: bootstrap.$danger;
+    border-color: app-variables.$color-danger;
 }
 
 ul {
@@ -70,6 +71,10 @@ li {
 a {
     color: app-variables.$link-color;
     text-decoration: none;
+
+    &:disabled {
+        color: app-variables.$link-color-disabled;
+    }
 
     &:hover {
         color: app-variables.$link-color-hover;

@@ -1,0 +1,8 @@
+@use '../../../assets/scss/app-variables';
+
+.spinner-border {
+    margin-left: app-variables.$spacing-2;
+    height: app-variables.$spacing-16;
+    width: app-variables.$spacing-16;
+    border-width: app-variables.$border-regular;
+}

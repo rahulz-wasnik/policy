@@ -10,4 +10,5 @@ export class SidebarComponent {
 
   createPolicy = routeConstants.CREATEPOLICY;
   createPolicyMatrix = routeConstants.POLICY_MATRIX + "/" + routeConstants.CREATE;
+  viewModifyPolicyMatrix = routeConstants.POLICY_MATRIX + "/" + routeConstants.VIEW_MODIFY;
 }

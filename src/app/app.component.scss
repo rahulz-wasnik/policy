@@ -4,7 +4,7 @@
 .layout {
     display: grid;
 
-    grid-template-rows: 10vh 100vh;
+    grid-template-rows: 10vh 90vh;
     grid-template-columns: minmax(min-content, 200px) 1fr;
 
     grid-template-areas:    "header-area header-area"
@@ -14,18 +14,19 @@
 #header {
     grid-area: header-area;
     // TODO: Create a mixin
-    border-bottom: 0.25px solid app-variables.$grey-100;
+    border-bottom: app-variables.$border-small solid app-variables.$grey-100;
     
 }
 
 #sidebar {
     grid-area: sidebar-area;
     // TODO: Create a mixin
-    border-right: 0.5px solid app-variables.$grey-100;
+    border-right: app-variables.$border-small solid app-variables.$grey-100;
     padding: app-variables.$spacing-16;
 }
 
 #content {
     grid-area: content-area;
     padding: app-variables.$spacing-16;
+    position: relative;
 }

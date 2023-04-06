@@ -1,0 +1,27 @@
+@use '../scss/app-variables';
+
+.app-button {
+
+    &-icon {
+        background-color: transparent;
+        border: none;
+    }
+
+    &-danger {
+        color: app-variables.$color-danger;
+
+        &:hover {
+            color: app-variables.$color-danger-hover;
+        }
+
+        &:active {
+            color: app-variables.$color-danger-active;
+        }
+    }
+}
+
+button {
+    &:disabled {
+        color: app-variables.$color-disabled;
+    }
+}

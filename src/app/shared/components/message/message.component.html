@@ -1,8 +1,8 @@
 <div *ngIf="message && hasError;" class="error error-container">
-    <app-alert></app-alert>
+    <app-svg-alert></app-svg-alert>
     <div class="error-text">{{ message }}</div>
 </div>
 <div *ngIf="message && !hasError;" class="success success-container">
-    <app-success></app-success>
+    <app-svg-success></app-svg-success>
     <div class="success-text">{{ message }}</div>
 </div>
