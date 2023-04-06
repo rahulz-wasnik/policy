@@ -9,21 +9,9 @@ import { MessageComponent } from '../../shared/components/message/message.compon
 import { CreatePolicyContainerComponent } from './create-policy-container.component';
 import { PolicyRoutingModule } from './policy-routing.module';
 
-
 @NgModule({
-  declarations: [
-    CreatePolicyContainerComponent,
-    CreatePolicyComponent
-  ],
-  imports: [
-    CommonModule,
-    PolicyRoutingModule,
-    ReactiveFormsModule,
-    FormValidationComponent,
-    MessageComponent
-  ],
-  providers: [
-    CreatePolicyResolver
-  ]
+    declarations: [CreatePolicyContainerComponent, CreatePolicyComponent],
+    imports: [CommonModule, PolicyRoutingModule, ReactiveFormsModule, FormValidationComponent, MessageComponent],
+    providers: [CreatePolicyResolver]
 })
-export class PolicyModule { }
+export class PolicyModule {}

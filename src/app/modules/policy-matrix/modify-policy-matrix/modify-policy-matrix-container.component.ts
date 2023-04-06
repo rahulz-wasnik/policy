@@ -6,7 +6,6 @@ import { PolicyMatrixService } from 'src/app/shared/services/policy-matrix.servi
 import { PolicyMatrixResponse } from '../../../shared/models';
 import { CreateModifyFormState } from '../policy-matrix.component';
 
-
 export const initialAppFormState: CreateModifyFormState = {
     policyMatrixResponse: null,
     processing: false,
@@ -19,15 +18,14 @@ export const initialAppFormState: CreateModifyFormState = {
 @Component({
     selector: 'app-modify-policy-matrix-container',
     template: `
-    <app-policy-matrix
-        [appFormState] = "(appFormState$ | async)!"
-        (updatePolicyMatrixEvent)="updatePolicyMatrix($event)"
-    ></app-policy-matrix>
-  `,
+        <app-policy-matrix
+            [appFormState]="(appFormState$ | async)!"
+            (updatePolicyMatrixEvent)="updatePolicyMatrix($event)"
+        ></app-policy-matrix>
+    `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
-
     appFormState$ = new BehaviorSubject<CreateModifyFormState>(initialAppFormState);
 
     protected destroy$ = new Subject<boolean>();
@@ -44,7 +42,7 @@ export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
 
         this.policyMatrixService.policyMatrixResponse$
             .pipe(
-                tap(policyMatrixResponse => {
+                tap((policyMatrixResponse) => {
                     if (policyMatrixResponse == null) {
                         return;
                     }
@@ -66,7 +64,6 @@ export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
     }
 
     updatePolicyMatrix(policyMatrixResponse: PolicyMatrixResponse): void {
-
         this.appFormState$.next({
             ...this.appFormState$.value,
             processing: true,
@@ -74,9 +71,10 @@ export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
             hasError: false
         });
 
-        const { id, ...policyMatrix } = policyMatrixResponse; 
+        const { id, ...policyMatrix } = policyMatrixResponse;
 
-        this.policyMatrixService.updatePolicyMatrix(id, policyMatrix)
+        this.policyMatrixService
+            .updatePolicyMatrix(id, policyMatrix)
             .pipe(
                 tap(() => {
                     this.appFormState$.next({
@@ -96,7 +94,7 @@ export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
                     return EMPTY;
                 }),
                 takeUntil(this.destroy$)
-            ).subscribe();
+            )
+            .subscribe();
     }
-
 }

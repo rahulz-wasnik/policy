@@ -6,7 +6,6 @@
 @use './app-bootstap';
 @import '@ng-select/ng-select/themes/default.theme.css';
 
-
 *,
 *::after,
 *::before {
@@ -27,11 +26,10 @@ body,
     color: app-variables.$color-base;
 }
 
-
 %msg-text {
     font-size: app-variables.$font-size-medium;
-    margin-left:  app-variables.$spacing-4;
-    margin-right:  app-variables.$spacing-4;
+    margin-left: app-variables.$spacing-4;
+    margin-right: app-variables.$spacing-4;
 }
 
 %msg-container {

@@ -7,13 +7,13 @@ import { PolicyMatrixResolver } from './policy-matrix.resolver';
 import { ViewPolicyMatricesContainerComponent } from './view-policy-matrices/view-policy-matrices-container.component';
 
 const routes: Routes = [
-  { path: routeConstants.CREATE, component: CreatePolicyMatrixContainerComponent, resolve: { value: PolicyMatrixResolver } },
-  { path: routeConstants.MODIFY, component: ModifyPolicyMatrixContainerComponent, resolve: { value: PolicyMatrixResolver } },
-  { path: routeConstants.VIEW, component: ViewPolicyMatricesContainerComponent }
+    { path: routeConstants.CREATE, component: CreatePolicyMatrixContainerComponent, resolve: { value: PolicyMatrixResolver } },
+    { path: routeConstants.MODIFY, component: ModifyPolicyMatrixContainerComponent, resolve: { value: PolicyMatrixResolver } },
+    { path: routeConstants.VIEW, component: ViewPolicyMatricesContainerComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
-export class PolicyMatrixRoutingModule { }
+export class PolicyMatrixRoutingModule {}

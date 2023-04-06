@@ -1,4 +1,3 @@
-
 export const routeConstants = {
     POLICY: 'policy',
     POLICY_MATRIX: 'policy-matrix',

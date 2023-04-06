@@ -8,30 +8,42 @@
             <label for="phase">Policy phase</label>
         </div>
         <div>
-            <select aria-label="Select phase" formControlName="phase" class="form-select"
-                    [class.border-danger]="phase.invalid && (phase.dirty || phase.touched)">
-                    <option value=""></option>
-                    <option *ngFor="let phase of appFormState.phases;" value="{{phase.label}}">{{ phase.value }}</option>
-                </select>
-                <app-form-validation [appControl]="phase"
-                    errorMessage="Policy phase is required."></app-form-validation>
+            <select
+                aria-label="Select phase"
+                formControlName="phase"
+                class="form-select"
+                [class.border-danger]="phase.invalid && (phase.dirty || phase.touched)"
+            >
+                <option value=""></option>
+                <option *ngFor="let phase of appFormState.phases" value="{{ phase.label }}">{{ phase.value }}</option>
+            </select>
+            <app-form-validation [appControl]="phase" errorMessage="Policy phase is required."></app-form-validation>
         </div>
 
         <div>
             <label for="name">Policy name</label>
         </div>
         <div>
-            <input type="text" aria-label=".form-control-sm policy name" class="form-control form-control-sm"
-                    [class.border-danger]="phase.invalid && (phase.dirty || phase.touched)" formControlName="name">
-                <app-form-validation [appControl]="name" errorMessage="Policy name is required."></app-form-validation>
+            <input
+                type="text"
+                aria-label=".form-control-sm policy name"
+                class="form-control form-control-sm"
+                [class.border-danger]="phase.invalid && (phase.dirty || phase.touched)"
+                formControlName="name"
+            />
+            <app-form-validation [appControl]="name" errorMessage="Policy name is required."></app-form-validation>
         </div>
 
         <div>
             <label for="description">Policy description</label>
         </div>
         <div>
-            <textarea type="text" aria-label=".form-control-sm policy name" class="form-control form-control-sm"
-                    formControlName="description"></textarea>
+            <textarea
+                type="text"
+                aria-label=".form-control-sm policy name"
+                class="form-control form-control-sm"
+                formControlName="description"
+            ></textarea>
         </div>
 
         <div class="button-area">
@@ -39,9 +51,7 @@
                 <span class="visually-hidden">Loading...</span>
             </div>
             <ng-template #createButton>
-                <button type="button" class="btn btn-primary btn-sm" (click)="createPolicy()">
-                    Create
-                </button>
+                <button type="button" class="btn btn-primary btn-sm" (click)="createPolicy()">Create</button>
             </ng-template>
         </div>
     </div>

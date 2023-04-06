@@ -15,27 +15,24 @@ import { ViewPolicyMatricesComponent } from './view-policy-matrices/view-policy-
 import { ModifyPolicyMatrixContainerComponent } from './modify-policy-matrix/modify-policy-matrix-container.component';
 import { CreatePolicyMatrixContainerComponent } from './create-policy-matrix/create-policy-matrix-container.component';
 
-
 @NgModule({
-  declarations: [
-    CreatePolicyMatrixContainerComponent,
-    PolicyMatrixComponent,
-    ViewPolicyMatricesContainerComponent,
-    ViewPolicyMatricesComponent,
-    ModifyPolicyMatrixContainerComponent
-  ],
-  imports: [
-    CommonModule,
-    PolicyMatrixRoutingModule,
-    ReactiveFormsModule,
-    NgSelectModule,
-    MessageComponent,
-    FormValidationComponent,
-    SvgCancelComponent,
-    SvgEditComponent
-  ],
-  providers: [
-    PolicyMatrixResolver
-  ]
+    declarations: [
+        CreatePolicyMatrixContainerComponent,
+        PolicyMatrixComponent,
+        ViewPolicyMatricesContainerComponent,
+        ViewPolicyMatricesComponent,
+        ModifyPolicyMatrixContainerComponent
+    ],
+    imports: [
+        CommonModule,
+        PolicyMatrixRoutingModule,
+        ReactiveFormsModule,
+        NgSelectModule,
+        MessageComponent,
+        FormValidationComponent,
+        SvgCancelComponent,
+        SvgEditComponent
+    ],
+    providers: [PolicyMatrixResolver]
 })
-export class PolicyMatrixModule { }
+export class PolicyMatrixModule {}

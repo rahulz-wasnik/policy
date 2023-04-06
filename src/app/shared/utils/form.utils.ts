@@ -1,4 +1,4 @@
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup } from '@angular/forms';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type ControlTypes = FormControl | FormGroup<any>;

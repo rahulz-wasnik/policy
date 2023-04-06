@@ -6,7 +6,6 @@ import { PolicyMatrixService } from 'src/app/shared/services/policy-matrix.servi
 import { PolicyMatrix } from '../../../shared/models';
 import { CreateModifyFormState } from '../policy-matrix.component';
 
-
 export const initialAppFormState: CreateModifyFormState = {
     processing: false,
     hasError: false,
@@ -19,15 +18,14 @@ export const initialAppFormState: CreateModifyFormState = {
 @Component({
     selector: 'app-create-policy-matrix-container',
     template: `
-    <app-policy-matrix
-        [appFormState] = "(appFormState$ | async)!"
-        (createPolicyMatrixEvent)="createPolicyMatrix($event)"
-    ></app-policy-matrix>
-  `,
+        <app-policy-matrix
+            [appFormState]="(appFormState$ | async)!"
+            (createPolicyMatrixEvent)="createPolicyMatrix($event)"
+        ></app-policy-matrix>
+    `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreatePolicyMatrixContainerComponent implements OnInit, OnDestroy {
-
     appFormState$ = new BehaviorSubject<CreateModifyFormState>(initialAppFormState);
 
     protected destroy$ = new Subject<boolean>();
@@ -49,7 +47,6 @@ export class CreatePolicyMatrixContainerComponent implements OnInit, OnDestroy {
     }
 
     createPolicyMatrix(policyMatrix: PolicyMatrix): void {
-
         this.appFormState$.next({
             ...this.appFormState$.value,
             processing: true,
@@ -57,7 +54,8 @@ export class CreatePolicyMatrixContainerComponent implements OnInit, OnDestroy {
             hasError: false
         });
 
-        this.policyMatrixService.createPolicyMatrix(policyMatrix)
+        this.policyMatrixService
+            .createPolicyMatrix(policyMatrix)
             .pipe(
                 tap((message) => {
                     this.appFormState$.next({
@@ -76,8 +74,8 @@ export class CreatePolicyMatrixContainerComponent implements OnInit, OnDestroy {
                     });
                     return EMPTY;
                 }),
-                takeUntil(this.destroy$),
-            ).subscribe();
+                takeUntil(this.destroy$)
+            )
+            .subscribe();
     }
-
 }

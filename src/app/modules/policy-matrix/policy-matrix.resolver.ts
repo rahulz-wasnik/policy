@@ -1,24 +1,21 @@
-import { HttpClient } from "@angular/common/http";
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import { RequiredPolicies, RiskProfiles } from "../../shared/models";
+import { RequiredPolicies, RiskProfiles } from '../../shared/models';
 
 export type RiskProfileAndRequiredPolicies = {
-    riskProfiles: RiskProfiles,
-    policies: RequiredPolicies
+    riskProfiles: RiskProfiles;
+    policies: RequiredPolicies;
 };
-
 
 @Injectable()
 export class PolicyMatrixResolver implements Resolve<RiskProfileAndRequiredPolicies> {
-   
     constructor(private http: HttpClient, private router: Router) {}
-    
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RiskProfileAndRequiredPolicies> {
-
         return of(testData);
         // TODO: Add logic for fetching data from the backend
         // return forkJoin(

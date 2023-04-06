@@ -19,20 +19,16 @@ const initialAppFormState: CreatePolicyFormState = {
 @Component({
     selector: 'app-create-policy-container',
     template: `
-        <app-create-policy
-            [appFormState] = "(appFormState$ | async)!"
-            (createPolicyEvent) = "createPolicy($event)"
-        ></app-create-policy>
+        <app-create-policy [appFormState]="(appFormState$ | async)!" (createPolicyEvent)="createPolicy($event)"></app-create-policy>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreatePolicyContainerComponent implements OnInit, OnDestroy {
-
     appFormState$ = new BehaviorSubject<CreatePolicyFormState>(initialAppFormState);
 
     private destroy$ = new Subject<boolean>();
 
-    constructor(private policyService: PolicyService, private route: ActivatedRoute) { }
+    constructor(private policyService: PolicyService, private route: ActivatedRoute) {}
 
     ngOnInit(): void {
         const phases = this.route.snapshot.data['phases'];
@@ -48,7 +44,6 @@ export class CreatePolicyContainerComponent implements OnInit, OnDestroy {
     }
 
     createPolicy(policy: Policy): void {
-
         this.appFormState$.next({
             ...this.appFormState$.value,
             hasError: false,
@@ -56,19 +51,17 @@ export class CreatePolicyContainerComponent implements OnInit, OnDestroy {
             processing: true
         });
 
-        this.policyService.createPolicy(policy)
+        this.policyService
+            .createPolicy(policy)
             .pipe(
                 tap(() => {
-
                     this.appFormState$.next({
                         ...this.appFormState$.value,
                         processing: false,
                         message: 'Policy created successfully.'
                     });
-
                 }),
                 catchError(() => {
-
                     this.appFormState$.next({
                         ...this.appFormState$.value,
                         processing: false,
@@ -79,7 +72,7 @@ export class CreatePolicyContainerComponent implements OnInit, OnDestroy {
                     return EMPTY;
                 }),
                 takeUntil(this.destroy$)
-            ).subscribe();
+            )
+            .subscribe();
     }
 }
-

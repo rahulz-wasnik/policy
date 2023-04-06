@@ -1,13 +1,12 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { delay, Observable, of, ReplaySubject } from "rxjs";
-import { Policy, PolicyMatrixResponse } from "../models";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { delay, Observable, of, ReplaySubject } from 'rxjs';
+import { Policy, PolicyMatrixResponse } from '../models';
 
 @Injectable({
-    providedIn: "root"
+    providedIn: 'root'
 })
 export class PolicyService {
-
     policyMatrixResponse$ = new ReplaySubject<PolicyMatrixResponse | null>(1);
 
     constructor(private http: HttpClient) {}

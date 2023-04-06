@@ -1,12 +1,13 @@
 # Installations
-* Install Ndde v 16.14.0. https://nodejs.org/download/release/v16.14.0/
-* Optional Installation - angular cli `npm install -g --save-exact @angular/cli@15.0.4`.
+
+-   Install Ndde v 16.14.0. https://nodejs.org/download/release/v16.14.0/
+-   Optional Installation - angular cli `npm install -g --save-exact @angular/cli@15.0.4`.
 
 ## Development
 
-* Run `npm install`
-* Change the port in the file proxy.config.json to point to your relevant backend port.
-* Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+-   Run `npm install`
+-   Change the port in the file proxy.config.json to point to your relevant backend port.
+-   Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Build
 

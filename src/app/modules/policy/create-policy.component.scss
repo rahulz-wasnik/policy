@@ -1,6 +1,5 @@
 @use '../../../assets/scss/app-variables';
 
-
 .content {
     display: grid;
     width: 80%;
@@ -12,12 +11,12 @@
     grid-template-columns: max-content 1fr;
     grid-gap: app-variables.$spacing-40;
 
-    grid-template-areas:    
-    "message message"
-    "label control"
-    "label control"
-    "label control"
-    "button button";
+    grid-template-areas:
+        'message message'
+        'label control'
+        'label control'
+        'label control'
+        'button button';
 
     .button-area {
         grid-area: button;

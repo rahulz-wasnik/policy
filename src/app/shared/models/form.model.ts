@@ -19,7 +19,7 @@ export interface LabelValue {
 }
 
 export interface AppFormState {
-    processing: boolean,
-    hasError: boolean,
-    message: string
+    processing: boolean;
+    hasError: boolean;
+    message: string;
 }
