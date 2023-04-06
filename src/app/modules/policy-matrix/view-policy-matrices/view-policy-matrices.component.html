@@ -1,0 +1,67 @@
+<ng-container *ngIf="!state.fetchInProcess && !state.fetchError; else processing">
+  <div *ngIf="state.policyMatrices.length > 0; else noPolicyMatrices;" class="content-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Application Type</th>
+          <th>Release Type</th>
+          <th>Risk profiles</th>
+          <th>Required policies</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let policyMatrix of state.policyMatrices; trackBy: trackById">
+          <td>{{ policyMatrix.applicationType }}</td>
+          <td>{{ policyMatrix.releaseType }}</td>
+          <td>{{ policyMatrix.riskProfile }}</td>
+          <td>
+            <ul *ngFor="let policy of policyMatrix.requiredPolicies">
+              <li> {{ policy }} </li>
+            </ul>
+          </td>
+          <td>
+            <button type="button" class="app-button-icon app-button-danger"
+              (click)="deletePolicyMatrix(policyMatrix.id)">
+              <div class="button-delete-content">
+                <div class="app-svg-container"><app-svg-cancel></app-svg-cancel></div>
+                <div *ngIf="state.processing && (state.idToBeDeleted === policyMatrix.id)">
+                  <div class="spinner-border app-spinner-small" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </div>
+            </button>
+            <div *ngIf="state.idToBeDeleted === policyMatrix.id">
+              <app-message [hasError]="state.hasError" [message]="state.message"></app-message>
+            </div>
+          </td>
+          <td>
+            <button type="button" class="app-button-icon app-button-secondary" (click)="updatePolicyMatrix(policyMatrix)">
+              <app-svg-edit></app-svg-edit>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #noPolicyMatrices>
+    <div class="message-container">
+      No more policy matrices.
+    </div>
+  </ng-template>
+</ng-container>
+
+<ng-template #processing>
+  <div *ngIf="state.fetchError; else fetchInProcess" class="message-container">
+    <app-message [hasError]="state.fetchError" [message]="state.message"></app-message>
+  </div>
+  <ng-template #fetchInProcess>
+    <div class="progress-spinner-container">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </ng-template>
+</ng-template>

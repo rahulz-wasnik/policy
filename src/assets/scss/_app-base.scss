@@ -1,6 +1,9 @@
 @use './app-variables';
 @use './app-button';
+@use './app-mixins';
 @use 'bootstrap/scss/bootstrap.scss';
+// Overriding bootstap styles - should always come after bootstap.scss
+@use './app-bootstap';
 @import '@ng-select/ng-select/themes/default.theme.css';
 
 

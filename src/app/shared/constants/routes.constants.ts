@@ -1,7 +1,8 @@
 
 export const routeConstants = {
-    CREATE_POLICY: 'create-policy',
+    POLICY: 'policy',
     POLICY_MATRIX: 'policy-matrix',
     CREATE: 'create',
-    VIEW_MODIFY: 'view-modify'
+    VIEW: 'view',
+    MODIFY: 'modify'
 };

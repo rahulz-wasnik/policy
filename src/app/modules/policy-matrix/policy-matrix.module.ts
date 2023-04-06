@@ -5,21 +5,24 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 import { PolicyMatrixRoutingModule } from './policy-matrix-routing.module';
 import { PolicyMatrixComponent } from './policy-matrix.component';
-import { PolicyMatrixContainerComponent } from './policy-matrix-container.component';
 import { MessageComponent } from '../../shared/components/message/message.component';
 import { FormValidationComponent } from '../../shared/components/form-validation/form-validation.component';
 import { PolicyMatrixResolver } from './policy-matrix.resolver';
-import { ViewModifyPolicyMatrixComponent } from './view-modify-policy-matrix/view-modify-policy-matrix.component';
-import { ViewModifyPolicyMatrixContainerComponent } from './view-modify-policy-matrix/view-modify-policy-matrix-container.component';
 import { SvgCancelComponent } from 'src/app/shared/svgs/svg-cancel.component';
+import { SvgEditComponent } from 'src/app/shared/svgs/svg.edit.component';
+import { ViewPolicyMatricesContainerComponent } from './view-policy-matrices/view-policy-matrices-container.component';
+import { ViewPolicyMatricesComponent } from './view-policy-matrices/view-policy-matrices.component';
+import { ModifyPolicyMatrixContainerComponent } from './modify-policy-matrix/modify-policy-matrix-container.component';
+import { CreatePolicyMatrixContainerComponent } from './create-policy-matrix/create-policy-matrix-container.component';
 
 
 @NgModule({
   declarations: [
-    PolicyMatrixContainerComponent,
+    CreatePolicyMatrixContainerComponent,
     PolicyMatrixComponent,
-    ViewModifyPolicyMatrixContainerComponent,
-    ViewModifyPolicyMatrixComponent
+    ViewPolicyMatricesContainerComponent,
+    ViewPolicyMatricesComponent,
+    ModifyPolicyMatrixContainerComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +31,8 @@ import { SvgCancelComponent } from 'src/app/shared/svgs/svg-cancel.component';
     NgSelectModule,
     MessageComponent,
     FormValidationComponent,
-    SvgCancelComponent
+    SvgCancelComponent,
+    SvgEditComponent
   ],
   providers: [
     PolicyMatrixResolver

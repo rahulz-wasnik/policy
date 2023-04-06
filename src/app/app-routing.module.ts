@@ -5,8 +5,8 @@ import { routeConstants } from './shared/constants';
 
 const routes: Routes = [
   {
-    path: routeConstants.CREATE_POLICY,
-    loadChildren: () => import('./modules/create-policy/create-policy.module').then(m => m.CreatePolicyModule)
+    path: routeConstants.POLICY,
+    loadChildren: () => import('./modules/policy/policy.module').then(m => m.PolicyModule)
   },
   {
     path: routeConstants.POLICY_MATRIX,

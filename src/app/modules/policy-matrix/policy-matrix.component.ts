@@ -1,9 +1,14 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { PolicyMatrix, PolicyMatrixResponse, ViewModifyPolicyMatrixForm } from '../../shared/models';
+import { AppFormState, PolicyMatrix, PolicyMatrixResponse, RequiredPolicies, RiskProfiles, ViewModifyPolicyMatrixForm } from '../../shared/models';
 import { markFormGroupTouched } from 'src/app/shared/utils';
-import { ViewModifyFormState } from './policy-matrix-container.component';
+
+export interface CreateModifyFormState extends AppFormState {
+  policyMatrixResponse: PolicyMatrixResponse | null;
+  riskProfiles: RiskProfiles;
+  policies: RequiredPolicies;
+}
 
 @Component({
   selector: 'app-policy-matrix',
@@ -12,7 +17,7 @@ import { ViewModifyFormState } from './policy-matrix-container.component';
 })
 export class PolicyMatrixComponent implements OnChanges {
 
-  @Input() appFormState!: ViewModifyFormState;
+  @Input() appFormState!: CreateModifyFormState;
   @Output() onCreatePolicyMatrix = new EventEmitter<PolicyMatrix>();
   @Output() onUpdatePolicyMatrix = new EventEmitter<PolicyMatrixResponse>();
 

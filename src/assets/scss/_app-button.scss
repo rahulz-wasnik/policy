@@ -3,6 +3,7 @@
 .app-button {
 
     &-icon {
+        padding: 0;
         background-color: transparent;
         border: none;
     }
@@ -16,6 +17,18 @@
 
         &:active {
             color: app-variables.$color-danger-active;
+        }
+    }
+
+    &-secondary {
+        color: app-variables.$color-secondary;
+
+        &:hover {
+            color: app-variables.$color-secondary-hover;
+        }
+
+        &:active {
+            color: app-variables.$color-secondary-active;
         }
     }
 }

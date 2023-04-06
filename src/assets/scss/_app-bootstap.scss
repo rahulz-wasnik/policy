@@ -1,0 +1,7 @@
+@use './app-variables';
+
+.app-spinner-small {
+    height: app-variables.$spacing-12;
+    width: app-variables.$spacing-12;
+    border-width: app-variables.$border-regular;
+}

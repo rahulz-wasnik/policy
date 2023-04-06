@@ -1,38 +1,45 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { BehaviorSubject, catchError, EMPTY, Subject, takeUntil, tap } from "rxjs";
+import { routeConstants } from "src/app/shared/constants";
 import { AppFormState, PolicyMatrixResponse } from "src/app/shared/models";
 import { PolicyMatrixService } from "src/app/shared/services/policy-matrix.service";
 
-export interface ViewModifyPolicyMatrixState extends AppFormState {
+export interface ViewPolicyMatricesState extends AppFormState {
     policyMatrices: PolicyMatrixResponse[];
-    idToDelete: number | null;
+    fetchInProcess: boolean;
+    fetchError: boolean;
+    idToBeDeleted: number | null;
 }
 
-export const initialState: ViewModifyPolicyMatrixState = {
+export const initialState: ViewPolicyMatricesState = {
+    fetchInProcess: true,
+    fetchError: false,
     processing: false,
     hasError: false,
     message: '',
     policyMatrices: [],
-    idToDelete: null
+    idToBeDeleted: null
 }
 
 @Component({
-    selector: 'app-view-modify-policy-container-matrix',
+    selector: 'app-view-policy-container-matrices',
     template: `
-        <app-view-modify-policy-matrix
+        <app-view-policy-matrices
             [state]="(state$ | async)!"
-            (onDelete)="deletePolicyMatrix($event)" 
-        ></app-view-modify-policy-matrix>
+            (onDeletePolicyMatrix)="deletePolicyMatrix($event)" 
+            (onUpdatePolicyMatrix)="updatePolicyMatrix($event)" 
+        ></app-view-policy-matrices>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ViewModifyPolicyMatrixContainerComponent implements OnInit {
+export class ViewPolicyMatricesContainerComponent implements OnInit {
 
-    state$ = new BehaviorSubject<ViewModifyPolicyMatrixState>(initialState);
+    state$ = new BehaviorSubject<ViewPolicyMatricesState>(initialState);
 
     private destroy$ = new Subject<boolean>();
 
-    constructor(private policyMatrixService: PolicyMatrixService) {}
+    constructor(private policyMatrixService: PolicyMatrixService, private router: Router) {}
 
     ngOnInit(): void {
 
@@ -41,6 +48,7 @@ export class ViewModifyPolicyMatrixContainerComponent implements OnInit {
             tap((policyMatrices) => {
                 this.state$.next({
                     ...this.state$.value,
+                    fetchInProcess: false,
                     policyMatrices
                 });
             }),
@@ -48,9 +56,9 @@ export class ViewModifyPolicyMatrixContainerComponent implements OnInit {
 
                 this.state$.next({
                     ...this.state$.value,
-                    processing: false,
-                    hasError: true,
-                    message: 'An error occured.' 
+                    fetchInProcess: false,
+                    fetchError: true,
+                    message: 'An error occured in fetching policy matrices.' 
                 });
                 return EMPTY;
             }),
@@ -63,7 +71,7 @@ export class ViewModifyPolicyMatrixContainerComponent implements OnInit {
 
         this.state$.next({
             ...this.state$.value,
-            idToDelete: id,
+            idToBeDeleted: id,
             hasError: false,
             processing: true
         });
@@ -76,7 +84,7 @@ export class ViewModifyPolicyMatrixContainerComponent implements OnInit {
                     ...this.state$.value,
                     policyMatrices,
                     processing: false,
-                    idToDelete: null
+                    idToBeDeleted: null
                 });
             }),
             catchError(() => {
@@ -92,5 +100,10 @@ export class ViewModifyPolicyMatrixContainerComponent implements OnInit {
             takeUntil(this.destroy$)
         )
         .subscribe();
+    }
+
+    updatePolicyMatrix(policyMatrixResponse: PolicyMatrixResponse): void {
+        this.policyMatrixService.policyMatrixResponse$.next(policyMatrixResponse);
+        this.router.navigateByUrl(routeConstants.POLICY_MATRIX + "/" + routeConstants.MODIFY, { state: { ...policyMatrixResponse }});
     }
 }

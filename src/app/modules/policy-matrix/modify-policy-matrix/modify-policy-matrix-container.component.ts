@@ -3,15 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { takeUntil, tap, catchError, EMPTY, finalize, BehaviorSubject, Subject } from 'rxjs';
 import { PolicyMatrixService } from 'src/app/shared/services/policy-matrix.service';
 
-import { AppFormState, PolicyMatrix, PolicyMatrixResponse, RequiredPolicies, RiskProfiles } from '../../shared/models';
+import { PolicyMatrixResponse } from '../../../shared/models';
+import { CreateModifyFormState } from '../policy-matrix.component';
 
-export interface ViewModifyFormState extends AppFormState {
-    policyMatrixResponse: PolicyMatrixResponse | null;
-    riskProfiles: RiskProfiles;
-    policies: RequiredPolicies;
-}
 
-export const initialAppFormState: ViewModifyFormState = {
+export const initialAppFormState: CreateModifyFormState = {
     policyMatrixResponse: null,
     processing: false,
     hasError: false,
@@ -21,19 +17,18 @@ export const initialAppFormState: ViewModifyFormState = {
 };
 
 @Component({
-    selector: 'app-policy-matrix-container',
+    selector: 'app-modify-policy-matrix-container',
     template: `
     <app-policy-matrix
         [appFormState] = "(appFormState$ | async)!"
-        (onCreatePolicyMatrix)="createPolicyMatrix($event)"
         (onUpdatePolicyMatrix)="updatePolicyMatrix($event)"
     ></app-policy-matrix>
   `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PolicyMatrixContainerComponent implements OnInit, OnDestroy {
+export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
 
-    appFormState$ = new BehaviorSubject<ViewModifyFormState>(initialAppFormState);
+    appFormState$ = new BehaviorSubject<CreateModifyFormState>(initialAppFormState);
 
     protected destroy$ = new Subject<boolean>();
 
@@ -70,38 +65,6 @@ export class PolicyMatrixContainerComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
 
-    createPolicyMatrix(policyMatrix: PolicyMatrix): void {
-
-        this.appFormState$.next({
-            ...this.appFormState$.value,
-            processing: true,
-            message: '',
-            hasError: false
-        });
-
-        this.policyMatrixService.createPolicyMatrix(policyMatrix)
-            .pipe(
-                tap((message) => {
-                    this.appFormState$.next({
-                        ...this.appFormState$.value,
-                        hasError: false,
-                        processing: false,
-                        message
-                    });
-                }),
-                catchError(() => {
-                    this.appFormState$.next({
-                        ...this.appFormState$.value,
-                        hasError: true,
-                        processing: false,
-                        message: 'Error occured during creation.'
-                    });
-                    return EMPTY;
-                }),
-                takeUntil(this.destroy$),
-            ).subscribe();
-    }
-
     updatePolicyMatrix(policyMatrixResponse: PolicyMatrixResponse): void {
 
         this.appFormState$.next({
@@ -128,7 +91,7 @@ export class PolicyMatrixContainerComponent implements OnInit, OnDestroy {
                         ...this.appFormState$.value,
                         hasError: true,
                         processing: false,
-                        message: 'An error occured.'
+                        message: 'An error occured during updation.'
                     });
                     return EMPTY;
                 }),
