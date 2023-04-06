@@ -1,32 +1,60 @@
 @use '../assets/scss/app-variables';
 
+header {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
 
-.layout {
-    display: grid;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: app-variables.$header-height;
 
-    grid-template-rows: 10vh 90vh;
-    grid-template-columns: minmax(min-content, 200px) 1fr;
-
-    grid-template-areas:    "header-area header-area"
-                            "sidebar-area content-area";
-}
-
-#header {
-    grid-area: header-area;
-    // TODO: Create a mixin
+    z-index: app-variables.$z-index-header;
+    // TODO: Change background color
+    // background-color: app-variables.$grey-100;
+    // TODO: Move to a mixin
     border-bottom: app-variables.$border-small solid app-variables.$grey-100;
-    
 }
 
-#sidebar {
-    grid-area: sidebar-area;
-    // TODO: Create a mixin
+.app-container {
+    display: flex;
+}
+
+.app-nav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: app-variables.$header-height;
+    bottom: 0;
+    width: app-variables.$sidebar-width;
+    overflow: none;
+    padding-top: app-variables.$spacing-48;
+    padding-bottom: app-variables.$spacing-48;
+    // TODO: Move to a mixin
     border-right: app-variables.$border-small solid app-variables.$grey-100;
-    padding: app-variables.$spacing-16;
+    z-index: app-variables.$z-index-nav;
+
+    &-underlap {
+        width: app-variables.$sidebar-width;
+    }
 }
 
-#content {
-    grid-area: content-area;
-    padding: app-variables.$spacing-16;
-    position: relative;
+.app-content-container {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - #{app-variables.$header-height});
+    margin-top: app-variables.$header-height;
+    overflow-y: auto;
 }
+
+.app-content {
+    position: relative;
+    width: 100%;
+    padding-top: app-variables.$spacing-48;
+    padding-bottom: app-variables.$spacing-48;
+}
+
+

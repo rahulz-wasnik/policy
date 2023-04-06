@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { delay, Observable, ReplaySubject } from "rxjs";
+import { Observable, ReplaySubject } from "rxjs";
 import { environment, url } from "../../../environments/environment";
 import { PolicyMatrix, PolicyMatrixResponse } from "../models";
 

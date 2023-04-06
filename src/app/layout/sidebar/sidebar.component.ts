@@ -8,7 +8,7 @@ import { routeConstants } from 'src/app/shared/constants';
 })
 export class SidebarComponent {
 
-  createPolicy = routeConstants.CREATEPOLICY;
+  createPolicy = routeConstants.CREATE_POLICY;
   createPolicyMatrix = routeConstants.POLICY_MATRIX + "/" + routeConstants.CREATE;
   viewModifyPolicyMatrix = routeConstants.POLICY_MATRIX + "/" + routeConstants.VIEW_MODIFY;
 }

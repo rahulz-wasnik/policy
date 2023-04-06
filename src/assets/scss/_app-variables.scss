@@ -10,6 +10,7 @@ $spacing-14: 0.875rem; // 14px
 $spacing-16: 1rem; // 16px
 $spacing-24: 1.5rem; // 24px
 $spacing-40: 2.5rem; //40px
+$spacing-48: 3rem; //48px
 $spacing-64: 4rem; //64px
 
 // Font scale
@@ -23,6 +24,8 @@ $border-medium: 0.5px;
 $border-regular: 1px;
 $border-large: 2px;
 
+// Z-index
+$z-index-1000: 1000;
 
 // Colors
 // Gray scale
@@ -70,5 +73,11 @@ $link-color: $grey-500;
 $link-color-hover: $grey-600;
 $link-color-active: $grey-700;
 $link-color-disabled: $color-disabled;
+
+// Layout
+$header-height: $spacing-64;
+$sidebar-width: 16rem;
+$z-index-header: $z-index-1000;
+$z-index-nav: $z-index-1000;
 
 
