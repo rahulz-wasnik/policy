@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs';
 
 import { AppFormState, Policy, PolicyPhases } from '../../shared/models';
-import { PolicyService } from '../../shared/services/policy.service';
+import { PolicyService } from './policy.service';
 
 export interface CreatePolicyFormState extends AppFormState {
     phases: PolicyPhases;

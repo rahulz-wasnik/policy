@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil, tap, catchError, EMPTY, finalize, BehaviorSubject, Subject } from 'rxjs';
-import { PolicyMatrixService } from 'src/app/shared/services/policy-matrix.service';
+import { PolicyMatrixService } from '../policy-matrix.service';
 
 import { PolicyMatrixResponse } from '../../../shared/models';
 import { CreateModifyFormState } from '../policy-matrix.component';

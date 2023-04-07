@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { delay, Observable, of, ReplaySubject } from 'rxjs';
-import { Policy, PolicyMatrixResponse } from '../models';
+import { Policy, PolicyMatrixResponse } from '../../shared/models';
 
 @Injectable({
     providedIn: 'root'

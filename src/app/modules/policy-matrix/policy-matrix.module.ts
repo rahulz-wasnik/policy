@@ -14,6 +14,7 @@ import { ViewPolicyMatricesContainerComponent } from './view-policy-matrices/vie
 import { ViewPolicyMatricesComponent } from './view-policy-matrices/view-policy-matrices.component';
 import { ModifyPolicyMatrixContainerComponent } from './modify-policy-matrix/modify-policy-matrix-container.component';
 import { CreatePolicyMatrixContainerComponent } from './create-policy-matrix/create-policy-matrix-container.component';
+import { PolicyMatrixService } from './policy-matrix.service';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,6 @@ import { CreatePolicyMatrixContainerComponent } from './create-policy-matrix/cre
         SvgCancelComponent,
         SvgEditComponent
     ],
-    providers: [PolicyMatrixResolver]
+    providers: [PolicyMatrixResolver, PolicyMatrixService]
 })
 export class PolicyMatrixModule {}

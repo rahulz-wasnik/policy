@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs';
 import { routeConstants } from 'src/app/shared/constants';
 import { AppFormState, PolicyMatrixResponse } from 'src/app/shared/models';
-import { PolicyMatrixService } from 'src/app/shared/services/policy-matrix.service';
+import { PolicyMatrixService } from '../policy-matrix.service';
 
 export interface ViewPolicyMatricesState extends AppFormState {
     policyMatrices: PolicyMatrixResponse[];
