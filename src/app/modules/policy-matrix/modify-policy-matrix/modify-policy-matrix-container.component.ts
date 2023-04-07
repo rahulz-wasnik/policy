@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { takeUntil, tap, catchError, EMPTY, finalize, BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil, tap, catchError, EMPTY, BehaviorSubject, Subject } from 'rxjs';
 import { PolicyMatrixService } from '../policy-matrix.service';
 
 import { PolicyMatrixResponse } from '../../../shared/models';
@@ -43,16 +43,13 @@ export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
         this.policyMatrixService.policyMatrixResponse$
             .pipe(
                 tap((policyMatrixResponse) => {
-                    if (policyMatrixResponse == null) {
-                        return;
-                    }
+                    console.log(policyMatrixResponse);
 
                     this.appFormState$.next({
                         ...this.appFormState$.value,
                         policyMatrixResponse
                     });
                 }),
-                finalize(() => this.policyMatrixService.policyMatrixResponse$.next(null)),
                 takeUntil(this.destroy$)
             )
             .subscribe();
@@ -61,6 +58,7 @@ export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.destroy$.next(true);
         this.destroy$.complete();
+        this.policyMatrixService.policyMatrixResponse$.next(null);
     }
 
     updatePolicyMatrix(policyMatrixResponse: PolicyMatrixResponse): void {
@@ -83,6 +81,8 @@ export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
                         processing: false,
                         message: 'Policy updated successfully.'
                     });
+
+                    this.policyMatrixService.policyMatrixResponse$.next(policyMatrixResponse);
                 }),
                 catchError(() => {
                     this.appFormState$.next({
