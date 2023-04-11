@@ -10,11 +10,11 @@
         <div>
             <select
                 aria-label="Select phase"
+                name="applicationType"
                 formControlName="applicationType"
                 class="form-select"
                 [class.border-danger]="applicationType.invalid && (applicationType.dirty || applicationType.touched)"
             >
-                <option value=""></option>
                 <option value="A1">A1</option>
                 <option value="A2">A2</option>
                 <option value="A3">A3</option>
@@ -22,6 +22,7 @@
             </select>
             <app-form-validation [appControl]="applicationType" errorMessage="Application type is required."></app-form-validation>
         </div>
+        <div></div>
 
         <div>
             <label for="releaseType">Release type</label>
@@ -29,17 +30,23 @@
         <div>
             <select
                 aria-label="Select phase"
+                name="releaseType"
                 formControlName="releaseType"
                 class="form-select"
                 [class.border-danger]="releaseType.invalid && (releaseType.dirty || releaseType.touched)"
+                (change)="getRiskProfilesByReleaseType()"
             >
-                <option value=""></option>
-                <option value="Solution launch">Solution launch</option>
-                <option value="Major">Major</option>
-                <option value="Minor">Minor</option>
-                <option value="Hotfix">Hotfix</option>
+                <option value="1">Solution launch</option>
+                <option value="2">Major</option>
+                <option value="3">Minor</option>
+                <option value="4">Hotfix</option>
             </select>
             <app-form-validation [appControl]="releaseType" errorMessage="Release type is required."></app-form-validation>
+        </div>
+        <div class="progress-area">
+            <div *ngIf="appFormState.fetchingRiskProfiles" class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
 
         <div>
@@ -48,17 +55,18 @@
         <div>
             <select
                 aria-label="Select phase"
+                name="riskProfile"
                 formControlName="riskProfile"
                 class="form-select"
                 [class.border-danger]="riskProfile.invalid && (riskProfile.dirty || riskProfile.touched)"
             >
-                <option value=""></option>
-                <option *ngFor="let riskProfile of appFormState.riskProfiles" value="{{ riskProfile.label }}">
-                    {{ riskProfile.value }}
+                <option *ngFor="let riskProfile of appFormState.riskProfiles" value="{{ riskProfile.value }}">
+                    {{ riskProfile.label }}
                 </option>
             </select>
             <app-form-validation [appControl]="riskProfile" errorMessage="Risk profile is required."></app-form-validation>
         </div>
+        <div></div>
 
         <div>
             <label for="requiredPolicies">Required policies</label>
@@ -71,11 +79,16 @@
                 formControlName="requiredPolicies"
                 labelForId="requiredPolicies"
                 [multiple]="true"
+                [closeOnSelect]="false"
+                [selectOnTab]="true"
+                [virtualScroll]="true"
+                [searchable]="true"
                 [class.border-danger]="requiredPolicies.invalid && (requiredPolicies.dirty || requiredPolicies.touched)"
             >
             </ng-select>
             <app-form-validation [appControl]="requiredPolicies" errorMessage="Required policies is required."></app-form-validation>
         </div>
+        <div></div>
 
         <div class="button-area">
             <div *ngIf="appFormState.processing; else buttons" class="spinner-border text-primary" role="status">

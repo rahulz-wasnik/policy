@@ -21,7 +21,8 @@
         "useDefineForClassFields": false,
         "lib": ["ES2022", "dom"],
         "strictNullChecks": true,
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        "suppressImplicitAnyIndexErrors": true
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,

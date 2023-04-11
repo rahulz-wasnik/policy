@@ -8,16 +8,17 @@
     margin-right: auto;
 
     grid-template-rows: app-variables.$spacing-16 repeat(5, app-variables.$spacing-24);
-    grid-template-columns: max-content 1fr;
-    grid-gap: app-variables.$spacing-40;
+    grid-template-columns: max-content 1fr app-variables.$spacing-16;
+    grid-row-gap: 36px;
+    grid-column-gap: 32px;
 
     grid-template-areas:
-        'message message'
-        'label control'
-        'label control'
-        'label control'
-        'label control'
-        'button button';
+        'message message message'
+        'label control spacing'
+        'label control spacing'
+        'label control spacing'
+        'label control spacing'
+        'button button spacing';
 
     .button-area {
         grid-area: button;
@@ -26,5 +27,9 @@
 
     .message-area {
         grid-area: message;
+    }
+
+    .progress-area {
+        justify-self: center;
     }
 }

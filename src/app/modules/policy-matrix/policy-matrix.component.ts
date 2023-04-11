@@ -15,6 +15,7 @@ export interface CreateModifyFormState extends AppFormState {
     policyMatrixResponse: PolicyMatrixResponse | null;
     riskProfiles: RiskProfiles;
     policies: RequiredPolicies;
+    fetchingRiskProfiles: boolean;
 }
 
 @Component({
@@ -26,13 +27,14 @@ export class PolicyMatrixComponent implements OnChanges {
     @Input() appFormState!: CreateModifyFormState;
     @Output() createPolicyMatrixEvent = new EventEmitter<PolicyMatrix>();
     @Output() updatePolicyMatrixEvent = new EventEmitter<PolicyMatrixResponse>();
+    @Output() getRiskProfilesByReleaseTypeEvent = new EventEmitter<string>();
 
-    policyMatrixResponse!: PolicyMatrixResponse;
+    policyMatrixResponseId!: number;
 
     appForm: FormGroup<ViewModifyPolicyMatrixForm> = new FormGroup<ViewModifyPolicyMatrixForm>({
         applicationType: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
         releaseType: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-        riskProfile: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+        riskProfile: new FormControl({ value: '', disabled: true }, { nonNullable: true }),
         requiredPolicies: new FormControl([], { nonNullable: true, validators: [Validators.required] })
     });
 
@@ -53,12 +55,28 @@ export class PolicyMatrixComponent implements OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes['appFormState']?.currentValue?.policyMatrixResponse) {
-            this.policyMatrixResponse = changes['appFormState'].currentValue.policyMatrixResponse;
-            this.appForm.patchValue({
-                ...this.policyMatrixResponse
-            });
+        const state: CreateModifyFormState = changes['appFormState']?.currentValue ?? null;
+        if (state) {
+            const { riskProfiles, policyMatrixResponse } = state;
+
+            if (riskProfiles?.length > 0) {
+                this.riskProfile.enable();
+                this.riskProfile.addValidators([Validators.required]);
+                this.riskProfile.updateValueAndValidity();
+            }
+
+            if (policyMatrixResponse) {
+                const { id, ...policyMatrix } = policyMatrixResponse;
+                this.policyMatrixResponseId = id;
+                this.appForm.patchValue({
+                    ...policyMatrix
+                });
+            }
         }
+    }
+
+    getRiskProfilesByReleaseType(): void {
+        this.getRiskProfilesByReleaseTypeEvent.next(this.releaseType.value);
     }
 
     createPolicyMatrix(): void {
@@ -72,7 +90,7 @@ export class PolicyMatrixComponent implements OnChanges {
         markFormGroupTouched(this.appForm);
         if (this.appForm.valid) {
             this.updatePolicyMatrixEvent.emit({
-                id: this.policyMatrixResponse.id,
+                id: this.policyMatrixResponseId,
                 ...this.appForm.getRawValue()
             });
         }

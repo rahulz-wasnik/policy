@@ -4,5 +4,6 @@ export const environment = {
 };
 
 export const url = {
-    POLICY_MATRIX: 'policyMatrix'
+    POLICY_MATRIX: 'policyMatrix',
+    RISK_PROFILE: 'riskProfile'
 };

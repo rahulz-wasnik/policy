@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { takeUntil, tap, catchError, EMPTY, BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil, tap, catchError, EMPTY, BehaviorSubject, Subject, combineLatest } from 'rxjs';
 import { PolicyMatrixService } from '../policy-matrix.service';
 
 import { PolicyMatrixResponse } from '../../../shared/models';
 import { CreateModifyFormState } from '../policy-matrix.component';
+import { RiskProfileService } from '../../../shared/services/risk-profile.service';
 
 export const initialAppFormState: CreateModifyFormState = {
     policyMatrixResponse: null,
@@ -12,7 +13,8 @@ export const initialAppFormState: CreateModifyFormState = {
     hasError: false,
     message: '',
     riskProfiles: [],
-    policies: []
+    policies: [],
+    fetchingRiskProfiles: false
 };
 
 @Component({
@@ -30,23 +32,28 @@ export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
 
     protected destroy$ = new Subject<boolean>();
 
-    constructor(private route: ActivatedRoute, private policyMatrixService: PolicyMatrixService) {}
+    constructor(
+        private route: ActivatedRoute,
+        private policyMatrixService: PolicyMatrixService,
+        private riskProfileService: RiskProfileService
+    ) {}
 
     ngOnInit(): void {
-        const { riskProfiles, policies } = this.route.snapshot.data['value'];
+        const { policies } = this.route.snapshot.data['value'];
         this.appFormState$.next({
             ...this.appFormState$.value,
-            riskProfiles,
             policies
         });
 
-        this.policyMatrixService.policyMatrixResponse$
+        combineLatest({
+            riskProfiles: this.riskProfileService.getRiskProfiles(),
+            policyMatrixResponse: this.policyMatrixService.policyMatrixResponse$
+        })
             .pipe(
-                tap((policyMatrixResponse) => {
-                    console.log(policyMatrixResponse);
-
+                tap(({ riskProfiles, policyMatrixResponse }) => {
                     this.appFormState$.next({
                         ...this.appFormState$.value,
+                        riskProfiles,
                         policyMatrixResponse
                     });
                 }),

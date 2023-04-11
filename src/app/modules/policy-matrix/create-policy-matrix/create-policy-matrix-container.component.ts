@@ -5,6 +5,7 @@ import { PolicyMatrixService } from '../policy-matrix.service';
 
 import { PolicyMatrix } from '../../../shared/models';
 import { CreateModifyFormState } from '../policy-matrix.component';
+import { RiskProfileService } from '../../../shared/services/risk-profile.service';
 
 export const initialAppFormState: CreateModifyFormState = {
     processing: false,
@@ -12,7 +13,8 @@ export const initialAppFormState: CreateModifyFormState = {
     message: '',
     riskProfiles: [],
     policies: [],
-    policyMatrixResponse: null
+    policyMatrixResponse: null,
+    fetchingRiskProfiles: false
 };
 
 @Component({
@@ -21,6 +23,7 @@ export const initialAppFormState: CreateModifyFormState = {
         <app-policy-matrix
             [appFormState]="(appFormState$ | async)!"
             (createPolicyMatrixEvent)="createPolicyMatrix($event)"
+            (getRiskProfilesByReleaseTypeEvent)="getRiskProfilesByReleaseType($event)"
         ></app-policy-matrix>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -30,13 +33,16 @@ export class CreatePolicyMatrixContainerComponent implements OnInit, OnDestroy {
 
     protected destroy$ = new Subject<boolean>();
 
-    constructor(private route: ActivatedRoute, private policyMatrixService: PolicyMatrixService) {}
+    constructor(
+        private route: ActivatedRoute,
+        private policyMatrixService: PolicyMatrixService,
+        private riskProfileService: RiskProfileService
+    ) {}
 
     ngOnInit(): void {
-        const { riskProfiles, policies } = this.route.snapshot.data['value'];
+        const { policies } = this.route.snapshot.data['value'];
         this.appFormState$.next({
             ...this.appFormState$.value,
-            riskProfiles,
             policies
         });
     }
@@ -44,6 +50,35 @@ export class CreatePolicyMatrixContainerComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.destroy$.next(true);
         this.destroy$.complete();
+    }
+
+    getRiskProfilesByReleaseType(id: string): void {
+        this.appFormState$.next({
+            ...this.appFormState$.value,
+            fetchingRiskProfiles: true
+        });
+
+        this.riskProfileService
+            .getRiskProfilesByReleaseType(id)
+            .pipe(
+                tap((riskProfiles) => {
+                    this.appFormState$.next({
+                        ...this.appFormState$.value,
+                        fetchingRiskProfiles: false,
+                        riskProfiles
+                    });
+                }),
+                catchError(() => {
+                    this.appFormState$.next({
+                        ...this.appFormState$.value,
+                        hasError: true,
+                        fetchingRiskProfiles: false,
+                        message: 'Error occured in fetching risk profiles.'
+                    });
+                    return EMPTY;
+                })
+            )
+            .subscribe();
     }
 
     createPolicyMatrix(policyMatrix: PolicyMatrix): void {
