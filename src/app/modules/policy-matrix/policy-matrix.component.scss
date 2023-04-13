@@ -7,24 +7,16 @@
     margin-left: auto;
     margin-right: auto;
 
-    grid-template-rows: app-variables.$spacing-16 repeat(5, app-variables.$spacing-24);
+    grid-template-rows: app-variables.$spacing-16 app-variables.$spacing-24;
     grid-template-columns: max-content 1fr;
     grid-gap: app-variables.$spacing-40;
 
-    grid-template-areas:
-        'message message'
-        'label control'
-        'label control'
-        'label control'
-        'label control'
-        'button button';
-
     .button-area {
-        grid-area: button;
+        grid-column: 1/-1;
         justify-self: end;
     }
 
     .message-area {
-        grid-area: message;
+        grid-column: 1/-1;
     }
 }
