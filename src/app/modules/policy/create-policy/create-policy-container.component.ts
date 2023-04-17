@@ -6,12 +6,9 @@ import { Policy } from '../../../shared/models';
 import { CreateModifyPolicyFormState, initialAppFormState } from '../policy.component';
 import { PolicyService } from '../policy.service';
 
-
 @Component({
     selector: 'app-create-policy-container',
-    template: `
-        <app-policy [appFormState]="(appFormState$ | async)!" (createPolicyEvent)="createPolicy($event)"></app-policy>
-    `,
+    template: ` <app-policy [appFormState]="(appFormState$ | async)!" (createPolicyEvent)="createPolicy($event)"></app-policy> `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreatePolicyContainerComponent implements OnInit, OnDestroy {

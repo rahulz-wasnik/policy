@@ -22,8 +22,7 @@ export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
 
     protected destroy$ = new Subject<boolean>();
 
-    constructor(private route: ActivatedRoute, private policyMatrixService: PolicyService,
-        private router: Router) {}
+    constructor(private route: ActivatedRoute, private policyMatrixService: PolicyService, private router: Router) {}
 
     ngOnInit(): void {
         const { requiredFacts, phases } = this.route.snapshot.data['value'];
@@ -36,7 +35,6 @@ export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
         this.policyMatrixService.policyResponse$
             .pipe(
                 tap((policyResponse) => {
-
                     if (policyResponse == null) {
                         this.router.navigateByUrl(routeConstants.POLICY + '/' + routeConstants.CREATE);
                     }

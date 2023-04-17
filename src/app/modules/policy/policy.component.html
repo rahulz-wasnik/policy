@@ -1,11 +1,10 @@
 <form [formGroup]="createPolicyForm">
     <div class="content">
-        
         <div class="message-area">
             <app-message [hasError]="appFormState.hasError" [message]="appFormState.message"></app-message>
         </div>
 
-         <div>
+        <div>
             <label for="policyPhase">Policy phase</label>
         </div>
         <div>
@@ -40,13 +39,13 @@
         </div>
         <div>
             <ng-select
-            [items]="appFormState.requiredFacts"
-            bindLabel="label"
-            bindValue="value"
-            formControlName="requiredFacts"
-            labelForId="requiredFacts"
-            [multiple]="true"
-            [class.border-danger]="requiredFacts.invalid && (requiredFacts.dirty || requiredFacts.touched)"
+                [items]="appFormState.requiredFacts"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="requiredFacts"
+                labelForId="requiredFacts"
+                [multiple]="true"
+                [class.border-danger]="requiredFacts.invalid && (requiredFacts.dirty || requiredFacts.touched)"
             >
             </ng-select>
             <app-form-validation [appControl]="requiredFacts" errorMessage="Required policies is required."></app-form-validation>
@@ -73,6 +72,5 @@
                 <button type="button" class="btn btn-primary btn-sm" (click)="createPolicy()">Create</button>
             </ng-template>
         </div>
-        
     </div>
 </form>

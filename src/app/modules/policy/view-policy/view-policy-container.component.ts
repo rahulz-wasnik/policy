@@ -22,16 +22,10 @@ export const initialState: ViewPolicyState = {
 
 @Component({
     selector: 'app-view-policy-container',
-    template: `
-        <app-view-policy
-            [state]="(state$ | async)!"
-            (updatePolicyEvent)="updatePolicy($event)"
-        ></app-view-policy>
-    `,
+    template: ` <app-view-policy [state]="(state$ | async)!" (updatePolicyEvent)="updatePolicy($event)"></app-view-policy> `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewPolicyContainerComponent implements OnInit {
-
     state$ = new BehaviorSubject<ViewPolicyState>(initialState);
 
     private destroy$ = new Subject<boolean>();

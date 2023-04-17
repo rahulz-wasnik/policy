@@ -14,12 +14,7 @@ import { SvgEditComponent } from 'src/app/shared/svgs/svg.edit.component';
 import { ViewPolicyContainerComponent } from './view-policy/view-policy-container.component';
 
 @NgModule({
-    declarations: [
-        CreatePolicyContainerComponent,
-        PolicyComponent,
-        ViewPolicyComponent,
-        ViewPolicyContainerComponent
-    ],
+    declarations: [CreatePolicyContainerComponent, PolicyComponent, ViewPolicyComponent, ViewPolicyContainerComponent],
     imports: [
         CommonModule,
         PolicyRoutingModule,
