@@ -1,0 +1,23 @@
+@use '../../../assets/scss/app-variables';
+
+.content {
+    display: grid;
+    width: 80%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+
+    grid-template-rows: app-variables.$spacing-16 max-content;
+    grid-template-columns: max-content 1fr;
+    row-gap: app-variables.$spacing-16;
+    column-gap: app-variables.$spacing-24;
+
+    .button-area {
+        grid-column: 1/-1;
+        justify-self: end;
+    }
+
+    .message-area {
+        grid-column: 1/-1;
+    }
+}

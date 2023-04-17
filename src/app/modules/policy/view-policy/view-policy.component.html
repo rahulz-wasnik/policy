@@ -1,0 +1,48 @@
+<ng-container *ngIf="!state.fetchInProcess && !state.fetchError; else processing">
+    <div *ngIf="state.policies.length > 0; else noPolicyMatrices" class="content-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Policy phase</th>
+                    <th>Policy name</th>
+                    <th>Policy description</th>
+                    <th>Required facts</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let policy of state.policies; trackBy: trackById">
+                    <td>{{ policy.policyPhase }}</td>
+                    <td>{{ policy.policyName }}</td>
+                    <td>{{ policy.policyDescription }}</td>
+                    <td>
+                        <ul *ngFor="let requiredFact of policy.requiredFacts">
+                            <li>{{ requiredFact }}</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <button type="button" class="app-button-icon app-button-secondary" (click)="updatePolicy(policy)">
+                            <app-svg-edit></app-svg-edit>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ng-template #noPolicyMatrices>
+        <div class="message-container">No more policy matrices.</div>
+    </ng-template>
+</ng-container>
+
+<ng-template #processing>
+    <div *ngIf="state.fetchError; else fetchInProcess" class="message-container">
+        <app-message [hasError]="state.fetchError" [message]="state.message"></app-message>
+    </div>
+    <ng-template #fetchInProcess>
+        <div class="progress-spinner-container">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </ng-template>
+</ng-template>

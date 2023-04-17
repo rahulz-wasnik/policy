@@ -1,26 +1,35 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay, Observable, of, ReplaySubject } from 'rxjs';
-import { Policy, PolicyMatrixResponse } from '../../shared/models';
+import { Observable, ReplaySubject } from 'rxjs';
+import { environment, url } from 'src/environments/environment';
+import { Policy, PolicyResponse } from '../../shared/models';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PolicyService {
-    policyMatrixResponse$ = new ReplaySubject<PolicyMatrixResponse | null>(1);
+    policyResponse$ = new ReplaySubject<PolicyResponse | null>(1);
 
     constructor(private http: HttpClient) {}
 
-    // TODO: To be refactored
-    // TODO: Remove the disable es lint rule
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    createPolicy(policy: Policy): Observable<boolean> {
-        return of(true).pipe(delay(1000));
-        // TODO: Add the backend logic to submit the policy
-        // return this.http.post<Policy>(environment.api + "create", JSON.stringify(policy), {
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // });
+    getPolicies(): Observable<PolicyResponse[]> {
+        return this.http.get<PolicyResponse[]>(environment.api + url.POLICY_MATRIX);
     }
+
+    createPolicy(policy: Policy): Observable<PolicyResponse> {
+        return this.http.post<PolicyResponse>(environment.api + url.POLICY + '/save', JSON.stringify(policy), {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+
+    updatePolicy(id: number, policy: Policy): Observable<PolicyResponse> {
+        return this.http.post<PolicyResponse>(environment.api + url.POLICY + '/update', JSON.stringify(policy), {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+
 }

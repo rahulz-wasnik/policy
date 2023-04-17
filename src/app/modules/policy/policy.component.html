@@ -1,0 +1,78 @@
+<form [formGroup]="createPolicyForm">
+    <div class="content">
+        
+        <div class="message-area">
+            <app-message [hasError]="appFormState.hasError" [message]="appFormState.message"></app-message>
+        </div>
+
+         <div>
+            <label for="policyPhase">Policy phase</label>
+        </div>
+        <div>
+            <select
+                id="policyPhase"
+                formControlName="policyPhase"
+                class="form-select"
+                [class.border-danger]="policyPhase.invalid && (policyPhase.dirty || policyPhase.touched)"
+            >
+                <option value=""></option>
+                <option *ngFor="let phase of appFormState.phases" value="{{ phase.label }}">{{ phase.value }}</option>
+            </select>
+            <app-form-validation [appControl]="policyPhase" errorMessage="Policy phase is required."></app-form-validation>
+        </div>
+
+        <div>
+            <label for="policyName">Policy name</label>
+        </div>
+        <div>
+            <input
+                type="text"
+                id="policyName"
+                class="form-control form-control-sm"
+                [class.border-danger]="policyName.invalid && (policyName.dirty || policyName.touched)"
+                formControlName="name"
+            />
+            <app-form-validation [appControl]="policyName" errorMessage="Policy name is required."></app-form-validation>
+        </div>
+
+        <div>
+            <label for="requiredFacts">Required facts</label>
+        </div>
+        <div>
+            <ng-select
+            [items]="appFormState.requiredFacts"
+            bindLabel="label"
+            bindValue="value"
+            formControlName="requiredFacts"
+            labelForId="requiredFacts"
+            [multiple]="true"
+            [class.border-danger]="requiredFacts.invalid && (requiredFacts.dirty || requiredFacts.touched)"
+            >
+            </ng-select>
+            <app-form-validation [appControl]="requiredFacts" errorMessage="Required policies is required."></app-form-validation>
+        </div>
+
+        <div>
+            <label for="policyDescription">Policy description</label>
+        </div>
+        <div>
+            <textarea
+                type="text"
+                id="policyDescription"
+                aria-label=".form-control-sm policy name"
+                class="form-control form-control-sm"
+                formControlName="policyDescription"
+            ></textarea>
+        </div>
+
+        <div class="button-area">
+            <div *ngIf="appFormState.processing; else createButton" class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <ng-template #createButton>
+                <button type="button" class="btn btn-primary btn-sm" (click)="createPolicy()">Create</button>
+            </ng-template>
+        </div>
+        
+    </div>
+</form>

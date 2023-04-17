@@ -2,29 +2,20 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs';
 
-import { AppFormState, Policy, PolicyPhases } from '../../shared/models';
-import { PolicyService } from './policy.service';
+import { Policy } from '../../../shared/models';
+import { CreateModifyPolicyFormState, initialAppFormState } from '../policy.component';
+import { PolicyService } from '../policy.service';
 
-export interface CreatePolicyFormState extends AppFormState {
-    phases: PolicyPhases;
-}
-
-const initialAppFormState: CreatePolicyFormState = {
-    processing: false,
-    hasError: false,
-    message: '',
-    phases: []
-};
 
 @Component({
     selector: 'app-create-policy-container',
     template: `
-        <app-create-policy [appFormState]="(appFormState$ | async)!" (createPolicyEvent)="createPolicy($event)"></app-create-policy>
+        <app-policy [appFormState]="(appFormState$ | async)!" (createPolicyEvent)="createPolicy($event)"></app-policy>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreatePolicyContainerComponent implements OnInit, OnDestroy {
-    appFormState$ = new BehaviorSubject<CreatePolicyFormState>(initialAppFormState);
+    appFormState$ = new BehaviorSubject<CreateModifyPolicyFormState>(initialAppFormState);
 
     private destroy$ = new Subject<boolean>();
 
@@ -66,7 +57,7 @@ export class CreatePolicyContainerComponent implements OnInit, OnDestroy {
                         ...this.appFormState$.value,
                         processing: false,
                         hasError: true,
-                        message: 'An error occured.'
+                        message: 'Error occured during creation'
                     });
 
                     return EMPTY;

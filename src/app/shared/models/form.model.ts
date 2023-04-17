@@ -1,9 +1,10 @@
 import { FormControl } from '@angular/forms';
 
 export interface PolicyForm {
-    phase: FormControl<string>;
-    name: FormControl<string>;
-    description: FormControl<string>;
+    policyPhase: FormControl<string>;
+    policyName: FormControl<string>;
+    policyDescription: FormControl<string>;
+    requiredFacts: FormControl<Array<string>>;
 }
 
 export interface ViewModifyPolicyMatrixForm {

@@ -1,8 +1,14 @@
 import { LabelValue } from './form.model';
 
 export interface Policy {
-    name: string;
-    description: string;
+    policyPhase: string;
+    policyName: string;
+    policyDescription: string;
+    requiredFacts: Array<string>;
+}
+
+export interface PolicyResponse extends Policy {
+    id: number;
 }
 
 export type PolicyPhases = LabelValue[];
@@ -10,6 +16,8 @@ export type PolicyPhases = LabelValue[];
 export type RiskProfiles = LabelValue[];
 
 export type RequiredPolicies = LabelValue[];
+
+export type RequiredFacts = LabelValue[];
 
 export interface PolicyMatrix {
     applicationType: string;
