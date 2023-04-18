@@ -1,10 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
-import { BehaviorSubject, catchError, EMPTY, Subject, takeUntil, tap } from "rxjs";
-import { LabelValue, RiskProfile } from "src/app/shared/models";
-import { initialAppFormState, RiskPolicyFormState } from "../risk-profile.component";
-import { RiskProfileService } from "../risk-profile.service";
-
-
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs';
+import { LabelValue, RiskProfile } from 'src/app/shared/models';
+import { initialAppFormState, RiskPolicyFormState } from '../risk-profile.component';
+import { RiskProfileService } from '../risk-profile.service';
 
 @Component({
     selector: 'app-create-risk-profile-container',
@@ -20,7 +18,6 @@ import { RiskProfileService } from "../risk-profile.service";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateRiskProfileContainerComponent implements OnInit, OnDestroy {
-
     appFormState$ = new BehaviorSubject<RiskPolicyFormState>(initialAppFormState);
 
     private destroy$ = new Subject<boolean>();
@@ -48,21 +45,22 @@ export class CreateRiskProfileContainerComponent implements OnInit, OnDestroy {
     }
 
     getAttributeValues(attributeName: string): void {
-        this.riskPolicyService.getAttributeValue(attributeName)
-        .pipe(
-            tap(attributeValues => {
-                this.appFormState$.next({
-                    ...this.appFormState$.value,
-                    attributeValues
-                });
-            }),
-            takeUntil(this.destroy$)
-        )
-        .subscribe();
+        this.riskPolicyService
+            .getAttributeValue(attributeName)
+            .pipe(
+                tap((attributeValues) => {
+                    this.appFormState$.next({
+                        ...this.appFormState$.value,
+                        attributeValues
+                    });
+                }),
+                takeUntil(this.destroy$)
+            )
+            .subscribe();
     }
 
     addedAttribute(attributeName: string) {
-        const attributeNames = this.appFormState$.value.attributeNames.filter(attr => attr.value != attributeName);
+        const attributeNames = this.appFormState$.value.attributeNames.filter((attr) => attr.value != attributeName);
         this.appFormState$.next({
             ...this.appFormState$.value,
             attributeNames,
@@ -80,7 +78,6 @@ export class CreateRiskProfileContainerComponent implements OnInit, OnDestroy {
     }
 
     createRiskProfile(riskProfile: RiskProfile): void {
-
         this.appFormState$.next({
             ...this.appFormState$.value,
             processing: true,
@@ -88,31 +85,32 @@ export class CreateRiskProfileContainerComponent implements OnInit, OnDestroy {
             hasError: false
         });
 
-        this.riskPolicyService.createRiskProfile(riskProfile)
-        .pipe(
-            tap(() => {
-                this.appFormState$.next({
-                    ...this.appFormState$.value,
-                    hasError: false,
-                    processing: false,
-                    message: 'Risk profile created succesfully.'
-                });
-            }),
-            catchError(() => {
-                this.appFormState$.next({
-                    ...this.appFormState$.value,
-                    hasError: true,
-                    processing: false,
-                    message: 'Error occured during creation.'
-                });
-                return EMPTY;
-            }),
-            takeUntil(this.destroy$)
-        )
-        .subscribe();
+        this.riskPolicyService
+            .createRiskProfile(riskProfile)
+            .pipe(
+                tap(() => {
+                    this.appFormState$.next({
+                        ...this.appFormState$.value,
+                        hasError: false,
+                        processing: false,
+                        message: 'Risk profile created succesfully.'
+                    });
+                }),
+                catchError(() => {
+                    this.appFormState$.next({
+                        ...this.appFormState$.value,
+                        hasError: true,
+                        processing: false,
+                        message: 'Error occured during creation.'
+                    });
+                    return EMPTY;
+                }),
+                takeUntil(this.destroy$)
+            )
+            .subscribe();
     }
 
     private getAttributeNameItem(attributeName: string): LabelValue {
-        return this.appFormState$.value.attributeNamesTracker.find(attr => attr.value === attributeName)!;
+        return this.appFormState$.value.attributeNamesTracker.find((attr) => attr.value === attributeName)!;
     }
 }

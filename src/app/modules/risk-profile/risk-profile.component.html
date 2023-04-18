@@ -10,43 +10,41 @@
                 <label for="name">Risk profile name</label>
             </div>
             <div class="col-10">
-                <input type="email" class="form-control" id="name" formControlName="name">
+                <input type="email" class="form-control" id="name" formControlName="name" />
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-2">
                 <label for="description">Description</label>
             </div>
             <div class="col-10">
-                <input type="email" class="form-control" id="description" formControlName="description">
+                <input type="email" class="form-control" id="description" formControlName="description" />
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-2">
                 <label for="activeStatus">Active status</label>
             </div>
             <div class="col-10">
-                <select
-                id="activeStatus"
-                formControlName="activeStatus"
-                class="form-select"
-                >
-                <option value="true">Enabled</option>
-                <option value="false">Disabled</option>
-            </select>
+                <select id="activeStatus" formControlName="activeStatus" class="form-select">
+                    <option value="true">Enabled</option>
+                    <option value="false">Disabled</option>
+                </select>
             </div>
         </div>
-        
+
         <div class="row attribute-area">
             <div class="container">
                 <div class="row">
                     <div class="col-3 attribute-area-col">
                         <label for="attributeName" class="form-label">Attribute name</label>
                         <select class="form-select" id="attributeName" formControlName="attributeName" (change)="getAttributeValues()">
-                            <option *ngFor="let attributeName of appFormState.attributeNames" value="{{ attributeName.value }}">{{ attributeName.label }}</option>
-                          </select>
+                            <option *ngFor="let attributeName of appFormState.attributeNames" value="{{ attributeName.value }}">
+                                {{ attributeName.label }}
+                            </option>
+                        </select>
                     </div>
                     <div class="col-3 attribute-area-col">
                         <label for="operator" class="form-label">Attribute operator</label>
@@ -54,12 +52,14 @@
                             <option value="gt">&gt;</option>
                             <option value="eq">eq</option>
                             <option value="lt">&lt;</option>
-                          </select>
+                        </select>
                     </div>
                     <div class="col-3 attribute-area-col">
                         <label for="attributeValue" class="form-label">Attribute value</label>
                         <select class="form-select" id="attributeValue" formControlName="attributeValue">
-                            <option *ngFor="let attributeValue of appFormState.attributeValues" value="{{ attributeValue.value }}">{{ attributeValue.label }}</option>
+                            <option *ngFor="let attributeValue of appFormState.attributeValues" value="{{ attributeValue.value }}">
+                                {{ attributeValue.label }}
+                            </option>
                         </select>
                     </div>
                     <div class="col-3 attribute-area-button">
@@ -68,7 +68,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div *ngIf="requiredFacts.controls.length > 0" class="row added-attributes">
             <table class="table">
                 <thead>
@@ -81,16 +81,16 @@
                     </tr>
                 </thead>
                 <tbody formArrayName="requiredFacts">
-                    <tr *ngFor="let requiredFactForm of requiredFacts.controls; let i=index">
+                    <tr *ngFor="let requiredFactForm of requiredFacts.controls; let i = index">
                         <ng-container [formGroupName]="i">
                             <td>
-                                <input type="text" class="form-control" formControlName="attributeName">
+                                <input type="text" class="form-control" formControlName="attributeName" />
                             </td>
                             <td>
-                                <input type="text" class="form-control" formControlName="operator">
+                                <input type="text" class="form-control" formControlName="operator" />
                             </td>
                             <td>
-                                <input type="text" class="form-control" formControlName="attributeValue">
+                                <input type="text" class="form-control" formControlName="attributeValue" />
                             </td>
                             <td class="delete-button-area">
                                 <button type="button" class="app-button-icon app-button-danger" (click)="deleteAttribute(i)">
@@ -104,7 +104,6 @@
                 </tbody>
             </table>
         </div>
-
 
         <div class="row">
             <div class="col-12 button-area">

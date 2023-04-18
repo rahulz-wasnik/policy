@@ -1,4 +1,4 @@
-import { LabelValue } from "./form.model";
+import { LabelValue } from './form.model';
 
 export interface RiskProfile {
     name: string;
@@ -10,7 +10,6 @@ export interface RiskProfile {
 export interface RiskProfileResponse extends RiskProfile {
     id: number;
 }
-
 
 export type AttributesNames = LabelValue[];
 

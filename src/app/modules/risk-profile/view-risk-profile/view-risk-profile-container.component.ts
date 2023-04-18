@@ -40,7 +40,8 @@ export class ViewPolicyMatricesContainerComponent implements OnInit {
     constructor(private riskProfileService: RiskProfileService, private router: Router) {}
 
     ngOnInit(): void {
-        this.riskProfileService.getRiskProfiles()
+        this.riskProfileService
+            .getRiskProfiles()
             .pipe(
                 tap(() => {
                     this.state$.next({
@@ -62,6 +63,5 @@ export class ViewPolicyMatricesContainerComponent implements OnInit {
             .subscribe();
     }
 
-    updateRiskProfile(riskProfileResponse: RiskProfileResponse): void {
-    }
+    updateRiskProfile(riskProfileResponse: RiskProfileResponse): void {}
 }

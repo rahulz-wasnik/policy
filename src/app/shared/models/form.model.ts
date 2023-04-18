@@ -35,4 +35,4 @@ export interface RiskProfileForm {
     requiredFacts: FormArray;
 }
 
-export type RequiredFactForm = Pick<RiskProfileForm, "attributeName" | "operator" | "attributeValue">;
+export type RequiredFactForm = Pick<RiskProfileForm, 'attributeName' | 'operator' | 'attributeValue'>;

@@ -1,15 +1,12 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import { AttributesNames, RiskProfile, RiskProfileResponse } from "../../../app/shared/models";
-import { environment, url } from "../../../environments/environment";
-
+import { AttributesNames, RiskProfile, RiskProfileResponse } from '../../../app/shared/models';
+import { environment, url } from '../../../environments/environment';
 
 @Injectable()
 export class RiskProfileService {
-
-
     private readonly attributeName = 'attributeName';
 
     constructor(private http: HttpClient) {}
@@ -19,10 +16,9 @@ export class RiskProfileService {
     }
 
     getAttributeValue(attributeName: string): Observable<AttributesNames> {
-
         let paramValue = '';
         if (attributeName === 'Vendor license application') {
-            paramValue = 'listVendorLicApp'
+            paramValue = 'listVendorLicApp';
         }
 
         const params = new HttpParams().set(this.attributeName, paramValue);

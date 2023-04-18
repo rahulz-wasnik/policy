@@ -12,9 +12,9 @@ const routes: Routes = [
         path: routeConstants.POLICY_MATRIX,
         loadChildren: () => import('./modules/policy-matrix/policy-matrix.module').then((m) => m.PolicyMatrixModule)
     },
-    { 
+    {
         path: routeConstants.RISK_PROFILE,
-        loadChildren: () => import('./modules/risk-profile/risk-profile.module').then(m => m.RiskProfileModule) 
+        loadChildren: () => import('./modules/risk-profile/risk-profile.module').then((m) => m.RiskProfileModule)
     },
     {
         path: 'error',
