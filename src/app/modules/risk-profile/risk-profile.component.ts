@@ -104,6 +104,7 @@ export class RiskProfileComponent {
     }
 
     // TODO: To be added
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     updateRiskProfile(): void {}
 
     deleteAttribute(index: number): void {

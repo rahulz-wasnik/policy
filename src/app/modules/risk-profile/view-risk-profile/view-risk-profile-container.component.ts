@@ -27,7 +27,6 @@ export const initialState: ViewPolicyMatricesState = {
         <app-view-risk-policy
             [state]="(state$ | async)!"
             (deleteRiskProfileEvent)="deleteRiskProfile($event)"
-            (updateRiskProfileEvent)="updateRiskProfile($event)"
         ></app-view-risk-policy>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -63,5 +62,4 @@ export class ViewPolicyMatricesContainerComponent implements OnInit {
             .subscribe();
     }
 
-    updateRiskProfile(riskProfileResponse: RiskProfileResponse): void {}
 }

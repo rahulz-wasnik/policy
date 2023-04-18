@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { markFormGroupTouched } from '../../shared/utils';
@@ -39,7 +39,7 @@ export const initialAppFormState: CreateModifyPolicyFormState = {
     templateUrl: './policy.component.html',
     styleUrls: ['./policy.component.scss']
 })
-export class PolicyComponent {
+export class PolicyComponent implements OnChanges {
     @Input() appFormState!: CreateModifyPolicyFormState;
     @Output() createPolicyEvent = new EventEmitter<Policy>();
     @Output() updatePolicyEvent = new EventEmitter<PolicyResponse>();

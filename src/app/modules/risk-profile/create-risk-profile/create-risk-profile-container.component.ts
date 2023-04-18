@@ -24,6 +24,7 @@ export class CreateRiskProfileContainerComponent implements OnInit, OnDestroy {
 
     constructor(private riskPolicyService: RiskProfileService) {}
 
+    // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
     ngOnInit(): void {
         // TODO: Uncomment to fetch attribute names from the backend
         // this.riskPolicyService.getAttributeNames()
@@ -70,6 +71,11 @@ export class CreateRiskProfileContainerComponent implements OnInit, OnDestroy {
 
     deletedAttribute(attributeName: string) {
         const attributeNameItem = this.getAttributeNameItem(attributeName);
+
+        if (!attributeNameItem) {
+            return;
+        }
+
         const attributeNames = [...this.appFormState$.value.attributeNames, attributeNameItem];
         this.appFormState$.next({
             ...this.appFormState$.value,
@@ -110,7 +116,7 @@ export class CreateRiskProfileContainerComponent implements OnInit, OnDestroy {
             .subscribe();
     }
 
-    private getAttributeNameItem(attributeName: string): LabelValue {
-        return this.appFormState$.value.attributeNamesTracker.find((attr) => attr.value === attributeName)!;
+    private getAttributeNameItem(attributeName: string): LabelValue | undefined {
+        return this.appFormState$.value.attributeNamesTracker.find((attr) => attr.value === attributeName);
     }
 }
