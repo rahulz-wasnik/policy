@@ -34,8 +34,6 @@ export const initialAppFormState: CreateModifyPolicyFormState = {
     policyResponse: null
 };
 
-
-
 @Component({
     selector: 'app-policy',
     templateUrl: './policy.component.html',

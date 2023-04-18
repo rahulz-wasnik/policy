@@ -15,7 +15,13 @@ import { ViewPolicyContainerComponent } from './view-policy/view-policy-containe
 import { ModifyPolicyContainerComponent } from './modify-policy/modify-policy-container';
 
 @NgModule({
-    declarations: [CreatePolicyContainerComponent, PolicyComponent, ViewPolicyComponent, ViewPolicyContainerComponent, ModifyPolicyContainerComponent],
+    declarations: [
+        CreatePolicyContainerComponent,
+        PolicyComponent,
+        ViewPolicyComponent,
+        ViewPolicyContainerComponent,
+        ModifyPolicyContainerComponent
+    ],
     imports: [
         CommonModule,
         PolicyRoutingModule,

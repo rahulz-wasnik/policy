@@ -9,12 +9,7 @@ import { PolicyService } from '../policy.service';
 
 @Component({
     selector: 'app-modify-policy-container',
-    template: `
-        <app-policy
-            [appFormState]="(appFormState$ | async)!"
-            (updatePolicyEvent)="updatePolicy($event)"
-        ></app-policy>
-    `,
+    template: ` <app-policy [appFormState]="(appFormState$ | async)!" (updatePolicyEvent)="updatePolicy($event)"></app-policy> `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModifyPolicyContainerComponent implements OnInit, OnDestroy {
