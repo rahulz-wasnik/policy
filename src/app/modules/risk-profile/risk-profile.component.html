@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <div *ngIf="requiredFacts.controls.length > 0" class="row added-attributes">
+        <div *ngIf="riskProfileMetaData.controls.length > 0" class="row added-attributes">
             <table class="table">
                 <thead>
                     <tr>
@@ -80,8 +80,8 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody formArrayName="requiredFacts">
-                    <tr *ngFor="let requiredFactForm of requiredFacts.controls; let i = index">
+                <tbody formArrayName="riskProfileMetaData">
+                    <tr *ngFor="let riskProfileMetaDataForm of riskProfileMetaData.controls; let i = index">
                         <ng-container [formGroupName]="i">
                             <td>
                                 <input type="text" class="form-control" formControlName="attributeName" />

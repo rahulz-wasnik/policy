@@ -4,9 +4,9 @@ import {
     AppFormState,
     AttributesNames,
     AttributeValues,
-    RequiredFactForm,
     RiskProfile,
     RiskProfileForm,
+    RiskProfileMetaDataForm,
     RiskProfileResponse
 } from '../../shared/models';
 
@@ -58,7 +58,7 @@ export class RiskProfileComponent {
         attributeName: new FormControl('', { nonNullable: true }),
         operator: new FormControl('', { nonNullable: true }),
         attributeValue: new FormControl('', { nonNullable: true }),
-        requiredFacts: new FormArray<any>([])
+        riskProfileMetaData: new FormArray<any>([])
     });
 
     get attributeName(): FormControl {
@@ -73,8 +73,8 @@ export class RiskProfileComponent {
         return this.appForm.get('operator') as FormControl;
     }
 
-    get requiredFacts(): FormArray {
-        return this.appForm.get('requiredFacts') as FormArray;
+    get riskProfileMetaData(): FormArray {
+        return this.appForm.get('riskProfileMetaData') as FormArray;
     }
 
     getAttributeValues(): void {
@@ -82,13 +82,13 @@ export class RiskProfileComponent {
     }
 
     addAttribute(): void {
-        const requiredFactForm = new FormGroup<RequiredFactForm>({
+        const requiredFactForm = new FormGroup<RiskProfileMetaDataForm>({
             attributeName: new FormControl({ value: this.attributeName.value, disabled: true }),
             attributeValue: new FormControl({ value: this.attributeValue.value, disabled: true }),
             operator: new FormControl({ value: this.operator.value, disabled: true })
         });
 
-        this.requiredFacts.push(requiredFactForm);
+        this.riskProfileMetaData.push(requiredFactForm);
         this.addedAttributeEvent.next(this.attributeName.value);
 
         this.appForm.patchValue({
@@ -99,17 +99,17 @@ export class RiskProfileComponent {
     }
 
     createRiskProfile(): void {
-        const { name, description, requiredFacts, activeStatus } = this.appForm.getRawValue();
-        this.createRiskProfileEvent.next({ name, description, activeStatus, requiredFacts });
+        const { name, description, riskProfileMetaData, activeStatus } = this.appForm.getRawValue();
+        this.createRiskProfileEvent.next({ name, description, activeStatus, riskProfileMetaData });
     }
 
     // TODO: To be added
     updateRiskProfile(): void {}
 
     deleteAttribute(index: number): void {
-        const requiredFactForm = this.requiredFacts.controls[index];
+        const requiredFactForm = this.riskProfileMetaData.controls[index];
         const attributeName = requiredFactForm.get('attributeName')?.value;
         this.deletedAttributeEvent.next(attributeName);
-        this.requiredFacts.controls.splice(index, 1);
+        this.riskProfileMetaData.controls.splice(index, 1);
     }
 }

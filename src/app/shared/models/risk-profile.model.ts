@@ -4,7 +4,7 @@ export interface RiskProfile {
     name: string;
     description: string;
     activeStatus: string;
-    requiredFacts: Array<string>;
+    riskProfileMetaData: Array<string>;
 }
 
 export interface RiskProfileResponse extends RiskProfile {

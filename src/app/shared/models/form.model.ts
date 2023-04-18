@@ -32,7 +32,7 @@ export interface RiskProfileForm {
     attributeName: FormControl<string>;
     operator: FormControl<string>;
     attributeValue: FormControl<string>;
-    requiredFacts: FormArray;
+    riskProfileMetaData: FormArray;
 }
 
-export type RequiredFactForm = Pick<RiskProfileForm, 'attributeName' | 'operator' | 'attributeValue'>;
+export type RiskProfileMetaDataForm = Pick<RiskProfileForm, 'attributeName' | 'operator' | 'attributeValue'>;
