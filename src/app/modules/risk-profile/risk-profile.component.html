@@ -1,0 +1,133 @@
+<form [formGroup]="appForm">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <app-message [hasError]="appFormState.hasError" [message]="appFormState.message"></app-message>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <label for="name">Risk profile name</label>
+            </div>
+            <div class="col-10">
+                <input type="email" class="form-control" id="name" formControlName="name">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-2">
+                <label for="description">Description</label>
+            </div>
+            <div class="col-10">
+                <input type="email" class="form-control" id="description" formControlName="description">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-2">
+                <label for="activeStatus">Active status</label>
+            </div>
+            <div class="col-10">
+                <select
+                id="activeStatus"
+                formControlName="activeStatus"
+                class="form-select"
+                >
+                <option value="true">Enabled</option>
+                <option value="false">Disabled</option>
+            </select>
+            </div>
+        </div>
+        
+        <div class="row attribute-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 attribute-area-col">
+                        <label for="attributeName" class="form-label">Attribute name</label>
+                        <select class="form-select" id="attributeName" formControlName="attributeName" (change)="getAttributeValues()">
+                            <option *ngFor="let attributeName of appFormState.attributeNames" value="{{ attributeName.value }}">{{ attributeName.label }}</option>
+                          </select>
+                    </div>
+                    <div class="col-3 attribute-area-col">
+                        <label for="operator" class="form-label">Attribute operator</label>
+                        <select class="form-select" id="operator" formControlName="operator">
+                            <option value="gt">&gt;</option>
+                            <option value="eq">eq</option>
+                            <option value="lt">&lt;</option>
+                          </select>
+                    </div>
+                    <div class="col-3 attribute-area-col">
+                        <label for="attributeValue" class="form-label">Attribute value</label>
+                        <select class="form-select" id="attributeValue" formControlName="attributeValue">
+                            <option *ngFor="let attributeValue of appFormState.attributeValues" value="{{ attributeValue.value }}">{{ attributeValue.label }}</option>
+                        </select>
+                    </div>
+                    <div class="col-3 attribute-area-button">
+                        <button type="button" class="btn btn-primary" (click)="addAttribute()">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div *ngIf="requiredFacts.controls.length > 0" class="row added-attributes">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Attribute name</th>
+                        <th>Attribute operator</th>
+                        <th>Attribute value</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody formArrayName="requiredFacts">
+                    <tr *ngFor="let requiredFactForm of requiredFacts.controls; let i=index">
+                        <ng-container [formGroupName]="i">
+                            <td>
+                                <input type="text" class="form-control" formControlName="attributeName">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" formControlName="operator">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" formControlName="attributeValue">
+                            </td>
+                            <td class="delete-button-area">
+                                <button type="button" class="app-button-icon app-button-danger" (click)="deleteAttribute(i)">
+                                    <div class="button-delete-content">
+                                        <div class="app-svg-container"><app-svg-cancel></app-svg-cancel></div>
+                                    </div>
+                                </button>
+                            </td>
+                        </ng-container>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12 button-area">
+                <div *ngIf="appFormState.processing; else buttons" class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <ng-template #buttons>
+                    <!--
+                        FIXME: Yet to build the update part
+                    -->
+                    <button
+                        *ngIf="appFormState.riskProfileResponse ?? false; else create"
+                        type="button"
+                        class="btn btn-primary btn-sm"
+                        (click)="updateRiskProfile()"
+                    >
+                        Update
+                    </button>
+                    <ng-template #create>
+                        <button type="button" class="btn btn-primary btn-sm" (click)="createRiskProfile()">Create</button>
+                    </ng-template>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</form>

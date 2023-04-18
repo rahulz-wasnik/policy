@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormArray, FormControl } from '@angular/forms';
 
 export interface PolicyForm {
     policyPhase: FormControl<string>;
@@ -24,3 +24,15 @@ export interface AppFormState {
     hasError: boolean;
     message: string;
 }
+
+export interface RiskProfileForm {
+    name: FormControl<string>;
+    description: FormControl<string>;
+    activeStatus: FormControl<string>;
+    attributeName: FormControl<string>;
+    operator: FormControl<string>;
+    attributeValue: FormControl<string>;
+    requiredFacts: FormArray;
+}
+
+export type RequiredFactForm = Pick<RiskProfileForm, "attributeName" | "operator" | "attributeValue">;

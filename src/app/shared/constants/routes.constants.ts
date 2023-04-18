@@ -3,5 +3,6 @@ export const routeConstants = {
     POLICY_MATRIX: 'policy-matrix',
     CREATE: 'create',
     VIEW: 'view',
-    MODIFY: 'modify'
+    MODIFY: 'modify',
+    RISK_PROFILE: 'risk-profile'
 };

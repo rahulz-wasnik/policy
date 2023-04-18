@@ -1,0 +1,27 @@
+@use '../../../assets/scss/app-variables';
+
+.row {
+    margin-top: app-variables.$spacing-16;
+    margin-bottom: app-variables.$spacing-16;
+}
+
+.attribute-area {
+    margin-top: app-variables.$spacing-32;
+}
+
+.attribute-area-col {
+    text-align: center;
+}
+
+.attribute-area-button {
+    display: flex;
+    align-items: flex-end;
+}
+
+.button-area {
+    text-align: right;
+}
+
+.delete-button-area {
+    vertical-align: middle;
+}
