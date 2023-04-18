@@ -1,4 +1,4 @@
-<form [formGroup]="createPolicyForm">
+<form [formGroup]="appForm">
     <div class="content">
         <div class="message-area">
             <app-message [hasError]="appFormState.hasError" [message]="appFormState.message"></app-message>
@@ -14,8 +14,7 @@
                 class="form-select"
                 [class.border-danger]="policyPhase.invalid && (policyPhase.dirty || policyPhase.touched)"
             >
-                <option value=""></option>
-                <option *ngFor="let phase of appFormState.phases" value="{{ phase.label }}">{{ phase.value }}</option>
+                <option *ngFor="let phase of appFormState.policyPhases" value="{{ phase.value }}">{{ phase.label }}</option>
             </select>
             <app-form-validation [appControl]="policyPhase" errorMessage="Policy phase is required."></app-form-validation>
         </div>
@@ -29,7 +28,7 @@
                 id="policyName"
                 class="form-control form-control-sm"
                 [class.border-danger]="policyName.invalid && (policyName.dirty || policyName.touched)"
-                formControlName="name"
+                formControlName="policyName"
             />
             <app-form-validation [appControl]="policyName" errorMessage="Policy name is required."></app-form-validation>
         </div>
@@ -48,7 +47,7 @@
                 [class.border-danger]="requiredFacts.invalid && (requiredFacts.dirty || requiredFacts.touched)"
             >
             </ng-select>
-            <app-form-validation [appControl]="requiredFacts" errorMessage="Required policies is required."></app-form-validation>
+            <app-form-validation [appControl]="requiredFacts" errorMessage="Required facts is required."></app-form-validation>
         </div>
 
         <div>
@@ -65,12 +64,25 @@
         </div>
 
         <div class="button-area">
-            <div *ngIf="appFormState.processing; else createButton" class="spinner-border text-primary" role="status">
+            <div *ngIf="appFormState.processing; else buttons" class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
-            <ng-template #createButton>
-                <button type="button" class="btn btn-primary btn-sm" (click)="createPolicy()">Create</button>
+            <ng-template #buttons>
+                <button
+                    *ngIf="appFormState.policyResponse ?? false; else create"
+                    type="button"
+                    class="btn btn-primary btn-sm"
+                    (click)="updatePolicy()"
+                >
+                    Update
+                </button>
+                <ng-template #create>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="createPolicy()">Create</button>
+                </ng-template>
             </ng-template>
         </div>
+    </div>
+    <div>
+        {{ appFormState | json }}
     </div>
 </form>

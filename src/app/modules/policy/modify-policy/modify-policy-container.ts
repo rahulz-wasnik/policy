@@ -8,16 +8,16 @@ import { CreateModifyPolicyFormState, initialAppFormState } from '../policy.comp
 import { PolicyService } from '../policy.service';
 
 @Component({
-    selector: 'app-modify-policy-matrix-container',
+    selector: 'app-modify-policy-container',
     template: `
-        <app-policy-matrix
+        <app-policy
             [appFormState]="(appFormState$ | async)!"
-            (updatePolicyMatrixEvent)="updatePolicyMatrix($event)"
-        ></app-policy-matrix>
+            (updatePolicyEvent)="updatePolicy($event)"
+        ></app-policy>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
+export class ModifyPolicyContainerComponent implements OnInit, OnDestroy {
     appFormState$ = new BehaviorSubject<CreateModifyPolicyFormState>(initialAppFormState);
 
     protected destroy$ = new Subject<boolean>();
@@ -25,13 +25,6 @@ export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute, private policyMatrixService: PolicyService, private router: Router) {}
 
     ngOnInit(): void {
-        const { requiredFacts, phases } = this.route.snapshot.data['value'];
-        this.appFormState$.next({
-            ...this.appFormState$.value,
-            requiredFacts,
-            phases
-        });
-
         this.policyMatrixService.policyResponse$
             .pipe(
                 tap((policyResponse) => {
@@ -55,7 +48,7 @@ export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
         this.policyMatrixService.policyResponse$.next(null);
     }
 
-    updatePolicyMatrix(policyResponse: PolicyResponse): void {
+    updatePolicy(policyResponse: PolicyResponse): void {
         this.appFormState$.next({
             ...this.appFormState$.value,
             processing: true,

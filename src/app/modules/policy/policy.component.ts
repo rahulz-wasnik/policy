@@ -1,12 +1,26 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { markFormGroupTouched } from '../../shared/utils';
 import { AppFormState, Policy, PolicyForm, PolicyPhases, PolicyResponse, RequiredFacts } from '../../shared/models';
 
+// TODO: Remove hardcoding
+const requiredFacts: RequiredFacts = [
+    {
+        label: 'a',
+        value: 'a'
+    }
+];
+const policyPhases: PolicyPhases = [
+    {
+        label: 'a',
+        value: 'a'
+    }
+];
+
 export interface CreateModifyPolicyFormState extends AppFormState {
     policyResponse: PolicyResponse | null;
-    phases: PolicyPhases;
+    policyPhases: PolicyPhases;
     requiredFacts: RequiredFacts;
 }
 
@@ -15,14 +29,12 @@ export const initialAppFormState: CreateModifyPolicyFormState = {
     hasError: false,
     message: '',
     // TODO: Remove hardcoded values
-    phases: [],
-    requiredFacts: [],
+    policyPhases,
+    requiredFacts,
     policyResponse: null
 };
 
-// TODO: Remove hardcoding
-const requiredFacts: RequiredFacts = [];
-const phases: PolicyPhases = [];
+
 
 @Component({
     selector: 'app-policy',
@@ -32,8 +44,11 @@ const phases: PolicyPhases = [];
 export class PolicyComponent {
     @Input() appFormState!: CreateModifyPolicyFormState;
     @Output() createPolicyEvent = new EventEmitter<Policy>();
+    @Output() updatePolicyEvent = new EventEmitter<PolicyResponse>();
 
-    createPolicyForm: FormGroup<PolicyForm> = new FormGroup<PolicyForm>({
+    policyResponse!: PolicyResponse;
+
+    appForm: FormGroup<PolicyForm> = new FormGroup<PolicyForm>({
         policyPhase: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
         policyName: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
         policyDescription: new FormControl('', { nonNullable: true }),
@@ -41,22 +56,41 @@ export class PolicyComponent {
     });
 
     get policyPhase(): FormControl {
-        return this.createPolicyForm.get('policyPhase') as FormControl;
+        return this.appForm.get('policyPhase') as FormControl;
     }
 
     get policyName(): FormControl {
-        return this.createPolicyForm.get('policyName') as FormControl;
+        return this.appForm.get('policyName') as FormControl;
     }
 
     get requiredFacts(): FormControl {
-        return this.createPolicyForm.get('requiredFacts') as FormControl;
+        return this.appForm.get('requiredFacts') as FormControl;
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['appFormState']?.currentValue?.policyResponse) {
+            this.policyResponse = changes['appFormState'].currentValue.policyResponse;
+            this.appForm.patchValue({
+                ...this.policyResponse
+            });
+        }
     }
 
     createPolicy(): void {
-        markFormGroupTouched(this.createPolicyForm);
+        markFormGroupTouched(this.appForm);
 
-        if (this.createPolicyForm.valid) {
-            this.createPolicyEvent.emit(this.createPolicyForm.getRawValue());
+        if (this.appForm.valid) {
+            this.createPolicyEvent.emit(this.appForm.getRawValue());
+        }
+    }
+
+    updatePolicy(): void {
+        markFormGroupTouched(this.appForm);
+        if (this.appForm.valid) {
+            this.updatePolicyEvent.emit({
+                id: this.policyResponse.id,
+                ...this.appForm.getRawValue()
+            });
         }
     }
 }

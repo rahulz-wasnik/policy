@@ -12,9 +12,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ViewPolicyComponent } from './view-policy/view-policy.component';
 import { SvgEditComponent } from 'src/app/shared/svgs/svg.edit.component';
 import { ViewPolicyContainerComponent } from './view-policy/view-policy-container.component';
+import { ModifyPolicyContainerComponent } from './modify-policy/modify-policy-container';
 
 @NgModule({
-    declarations: [CreatePolicyContainerComponent, PolicyComponent, ViewPolicyComponent, ViewPolicyContainerComponent],
+    declarations: [CreatePolicyContainerComponent, PolicyComponent, ViewPolicyComponent, ViewPolicyContainerComponent, ModifyPolicyContainerComponent],
     imports: [
         CommonModule,
         PolicyRoutingModule,

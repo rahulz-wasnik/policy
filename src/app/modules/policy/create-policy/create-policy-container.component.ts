@@ -11,20 +11,12 @@ import { PolicyService } from '../policy.service';
     template: ` <app-policy [appFormState]="(appFormState$ | async)!" (createPolicyEvent)="createPolicy($event)"></app-policy> `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CreatePolicyContainerComponent implements OnInit, OnDestroy {
+export class CreatePolicyContainerComponent implements OnDestroy {
     appFormState$ = new BehaviorSubject<CreateModifyPolicyFormState>(initialAppFormState);
 
     private destroy$ = new Subject<boolean>();
 
     constructor(private policyService: PolicyService, private route: ActivatedRoute) {}
-
-    ngOnInit(): void {
-        const phases = this.route.snapshot.data['phases'];
-        this.appFormState$.next({
-            ...this.appFormState$.value,
-            phases
-        });
-    }
 
     ngOnDestroy(): void {
         this.destroy$.next(true);
