@@ -24,10 +24,7 @@ export const initialState: ViewPolicyMatricesState = {
 @Component({
     selector: 'app-view-risk-policyr-matrices',
     template: `
-        <app-view-risk-policy
-            [state]="(state$ | async)!"
-            (deleteRiskProfileEvent)="deleteRiskProfile($event)"
-        ></app-view-risk-policy>
+        <app-view-risk-policy [state]="(state$ | async)!" (deleteRiskProfileEvent)="deleteRiskProfile($event)"></app-view-risk-policy>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -61,5 +58,4 @@ export class ViewPolicyMatricesContainerComponent implements OnInit {
             )
             .subscribe();
     }
-
 }
