@@ -1,6 +1,7 @@
 export const environment = {
     production: true,
-    api: 'api/'
+    api: 'api/',
+    apiUrl: 'http://dev.somedomain.com'
 };
 
 export const url = {
