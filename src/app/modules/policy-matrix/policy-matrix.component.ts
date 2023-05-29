@@ -3,18 +3,20 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {
     AppFormState,
+    LabelValue,
     PolicyMatrix,
     PolicyMatrixResponse,
     RequiredPolicies,
     RiskProfiles,
-    ViewModifyPolicyMatrixForm
+    ViewModifyPolicyMatrixForm,
+    PolicyResponse
 } from '../../shared/models';
 import { markFormGroupTouched } from 'src/app/shared/utils';
 
 export interface CreateModifyFormState extends AppFormState {
     policyMatrixResponse: PolicyMatrixResponse | null;
     riskProfiles: RiskProfiles;
-    policies: RequiredPolicies;
+    policies: PolicyResponse[];
 }
 
 @Component({
@@ -53,6 +55,7 @@ export class PolicyMatrixComponent implements OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
+        console.log(changes['appFormState']);
         if (changes['appFormState']?.currentValue?.policyMatrixResponse) {
             this.policyMatrixResponse = changes['appFormState'].currentValue.policyMatrixResponse;
             this.appForm.patchValue({

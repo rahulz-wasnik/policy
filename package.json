@@ -1,6 +1,6 @@
 {
     "name": "policy",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "scripts": {
         "ng": "ng",
         "start": "ng serve --proxy-config proxy.config.json",
@@ -8,7 +8,8 @@
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
         "lint": "ng lint",
-        "format": "npx prettier --write ."
+        "format": "npx prettier --write .",
+        "postinstall": "node try.js"
     },
     "private": true,
     "dependencies": {
@@ -23,7 +24,9 @@
         "@ng-select/ng-select": "~10.0.4",
         "@popperjs/core": "2.11.6",
         "bootstrap": "5.2.3",
+        "git-describe": "^4.1.1",
         "rxjs": "~7.5.0",
+        "simple-git": "^3.18.0",
         "tslib": "^2.3.0",
         "zone.js": "~0.12.0"
     },

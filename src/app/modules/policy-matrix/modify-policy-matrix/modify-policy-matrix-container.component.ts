@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { takeUntil, tap, catchError, EMPTY, BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil, tap, catchError, EMPTY, BehaviorSubject, Subject, forkJoin, combineLatestWith } from 'rxjs';
 import { PolicyMatrixService } from '../policy-matrix.service';
 
 import { PolicyMatrixResponse } from '../../../shared/models';
@@ -30,29 +30,39 @@ export class ModifyPolicyMatrixContainerComponent implements OnInit, OnDestroy {
 
     protected destroy$ = new Subject<boolean>();
 
-    constructor(private route: ActivatedRoute, private policyMatrixService: PolicyMatrixService) {}
+    constructor(private route: ActivatedRoute, private policyMatrixService: PolicyMatrixService) { }
 
     ngOnInit(): void {
-        const { riskProfiles, policies } = this.route.snapshot.data['value'];
-        this.appFormState$.next({
-            ...this.appFormState$.value,
-            riskProfiles,
-            policies
-        });
 
-        this.policyMatrixService.policyMatrixResponse$
-            .pipe(
-                tap((policyMatrixResponse) => {
-                    console.log(policyMatrixResponse);
-
-                    this.appFormState$.next({
-                        ...this.appFormState$.value,
-                        policyMatrixResponse
-                    });
-                }),
-                takeUntil(this.destroy$)
-            )
+        forkJoin({
+            policies: this.policyMatrixService.getPolicies()
+        }).pipe(
+            combineLatestWith(this.policyMatrixService.policyMatrixResponse$),
+            tap(([{ policies }, policyMatrixResponse]) => {
+                console.log(policies, policyMatrixResponse);
+                this.appFormState$.next({
+                    ...this.appFormState$.value,
+                    policyMatrixResponse,
+                    policies
+                });
+            }),
+            takeUntil(this.destroy$)
+        )
             .subscribe();
+
+        // this.policyMatrixService.policyMatrixResponse$
+        //     .pipe(
+        //         tap((policyMatrixResponse) => {
+
+
+        //             this.appFormState$.next({
+        //                 ...this.appFormState$.value,
+        //                 policyMatrixResponse
+        //             });
+        //         }),
+        //         takeUntil(this.destroy$)
+        //     )
+        //     .subscribe();
     }
 
     ngOnDestroy(): void {

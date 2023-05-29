@@ -14,9 +14,7 @@ import { environment } from '../environments/environment';
     declarations: [AppComponent, ErrorPageComponent, HeaderComponent, SidebarComponent],
     imports: [BrowserModule, AppRoutingModule],
     providers: [
-        provideHttpClient(
-            withInterceptorsFromDi()
-        ),
+        provideHttpClient(withInterceptorsFromDi())
         // TODO: Uncomment to change the base url
         // {
         //     provide: HTTP_INTERCEPTORS,

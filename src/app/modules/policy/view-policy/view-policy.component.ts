@@ -14,7 +14,7 @@ export class ViewPolicyComponent {
     @Output() updatePolicyEvent = new EventEmitter<PolicyResponse>();
 
     trackById(index: number, item: PolicyResponse): number {
-        return item.id;
+        return Number(item.id);
     }
 
     deletePolicy(id: number): void {

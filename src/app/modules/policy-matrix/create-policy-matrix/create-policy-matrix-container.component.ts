@@ -33,12 +33,22 @@ export class CreatePolicyMatrixContainerComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute, private policyMatrixService: PolicyMatrixService) {}
 
     ngOnInit(): void {
-        const { riskProfiles, policies } = this.route.snapshot.data['value'];
+        const { riskProfiles } = this.route.snapshot.data['value'];
         this.appFormState$.next({
             ...this.appFormState$.value,
-            riskProfiles,
-            policies
+            riskProfiles
         });
+
+        this.policyMatrixService.getPolicies()
+        .pipe(
+            tap((policies) => {
+                this.appFormState$.next({
+                    ...this.appFormState$.value,
+                    policies
+                });
+            }),
+            takeUntil(this.destroy$)
+        ).subscribe();
     }
 
     ngOnDestroy(): void {

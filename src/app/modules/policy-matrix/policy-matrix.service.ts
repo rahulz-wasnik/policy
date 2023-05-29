@@ -2,13 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { environment, url } from '../../../environments/environment';
-import { PolicyMatrix, PolicyMatrixResponse } from '../../shared/models';
+import { LabelValue, PolicyMatrix, PolicyMatrixResponse, PolicyResponse } from '../../shared/models';
 
 @Injectable()
 export class PolicyMatrixService {
     policyMatrixResponse$ = new ReplaySubject<PolicyMatrixResponse | null>(1);
 
     constructor(private http: HttpClient) {}
+
+    getPolicies(): Observable<PolicyResponse[]> {
+        return this.http.get<PolicyResponse[]>(environment.api + url.POLICY);
+    }
 
     getPolicyMatrices(): Observable<PolicyMatrixResponse[]> {
         return this.http.get<PolicyMatrixResponse[]>(environment.api + url.POLICY_MATRIX);

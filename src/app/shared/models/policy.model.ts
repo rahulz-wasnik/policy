@@ -23,7 +23,7 @@ export interface PolicyMatrix {
     applicationType: string;
     releaseType: string;
     riskProfile: string;
-    requiredPolicies: Array<string>;
+    requiredPolicies: Array<number>;
 }
 
 export interface PolicyMatrixResponse extends PolicyMatrix {
